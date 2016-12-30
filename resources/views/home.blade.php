@@ -8,6 +8,7 @@
                 <div class="panel-heading">Article overview</div>
 
                 <div class="panel-body">
+                  <!--  hier moeten later de artikels komen (opsomming van alle artikels)-->
                     You are logged in!
                 </div>
             </div>

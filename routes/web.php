@@ -10,9 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
+welcome = main page
+*/
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/instructies', function () {
@@ -22,6 +24,12 @@ Route::get('/instructies', function () {
 Route::get('/article', function () {
     return view('article');
 });
+
+// deze moet nog veranderen naar de pagina waar de artikels moeten verschijnen
+Route::post('/add', function () {
+    return view('home');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');

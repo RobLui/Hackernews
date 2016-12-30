@@ -1,29 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
-
     <!-- Bootstrap Boilerplate... -->
-
-    <div class="panel-body">
-        <!-- New article Form -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Add article</div>
+                    <div class="panel-content">
+        <!-- New article Form - /add wordt achter de link bijgevoegd -->
         <form action="/add" method="POST" class="form-horizontal">
             {{ csrf_field() }}
-
-            <!-- Task Name -->
+            <!-- article title -->
             <div class="form-group">
-                <label for="article_name" class="col-sm-3 control-label">Title (max 255 chars)</label>
+                <label for="titel" class="col-sm-3 control-label">Title (max 255 chars)</label>
                 <div class="col-sm-6">
-                    <input type="text" name="name" id="article_name" class="form-control">
+                    <input type="text" name="title" id="title" class="form-control">
                 </div>
               </div>
               <div class="form-group">
-                <label for="article_url" class="col-sm-3 control-label">URL</label>
+                <label for="url" class="col-sm-3 control-label">URL</label>
                 <div class="col-sm-6">
-                    <input type="url" name="url" id="article_url" class="form-control">
+                    <input type="text" name="url" id="url" class="form-control">
                 </div>
               </div>
 
-            <!-- Add Task Button -->
+            <!-- Add article Button -->
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                     <button type="submit" class="btn btn-default">
@@ -33,5 +35,9 @@
             </div>
         </form>
     </div>
-
+  </div>
+</div>
+</div>
+</div>
+</div>
 @endsection
