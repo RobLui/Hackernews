@@ -13,6 +13,10 @@
 /*
 welcome = main page
 */
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
 Route::get('/', function () {
     return view('index');
 });
