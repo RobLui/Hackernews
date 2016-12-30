@@ -13,17 +13,16 @@ class ArticleController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+
     }
 
     /**
-     * Show the application dashboard.
+     * Show the Article dashboard.
      *
      * @return \Illuminate\Http\Response
      */
-    // public function index()
-    // {
-    //     return view('home');
-    // }
-    echo "test";
+    public function index()
+    {
+      return view('home');
+    }
 }
