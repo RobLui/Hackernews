@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<body>
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
+              <div class="panel-heading">Instructies</div>
                 <div class="panel-content">
 
                 <h1>Algemeen</h1>
@@ -29,14 +31,12 @@
                     <li>Er worden GEEN hard deletes uitgevoerd.</li>
                     <li>Als je opdracht is afgewerkt doe je een export van je database (inclusief databasenaam en structuur) en plaats je deze in de root van je project.</li>
                 </ul>
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 @endsection
-    <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
 </body>

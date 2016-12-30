@@ -44,9 +44,14 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
-                      <li><a href="{{ url('/home') }}">Home</a></li>
-                      <li><a href="{{ url('/article/add') }}">Add article</a></li>
-                      <li><a href="{{ url('/instructies') }}">Instructies</a></li>
+                        @if (Auth::user())
+                        <li><a href="{{ url('/home') }}">Home</a></li>
+                        <li><a href="{{ url('/article') }}">Add article</a></li>
+                        <li><a href="{{ url('/instructies') }}">Instructies</a></li>
+                        @else
+                        <li><a href="{{ url('/home') }}">Home</a></li>
+                        <li><a href="{{ url('/instructies') }}">Instructies</a></li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
