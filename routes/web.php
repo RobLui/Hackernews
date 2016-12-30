@@ -26,7 +26,18 @@ Route::get('/article', function () {
 });
 
 // deze moet nog veranderen naar de pagina waar de artikels moeten verschijnen
-Route::post('/add', function () {
+Route::post('/add', function (Request $request) {
+    $validator = Validator::make(Request::all(), [
+      // title & url moeten ingevuld zijn anders wordt je niet naar home gestuurd
+        'title' => 'required|max:255',
+        'url' => 'required|max:255'
+    ]);
+
+    if ($validator->fails()) {
+        return redirect('/article')
+            ->withInput()
+            ->withErrors($validator);
+    }
     return view('home');
 });
 
