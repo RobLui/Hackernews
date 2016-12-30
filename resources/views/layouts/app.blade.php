@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Hackernews') }}</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -36,7 +36,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel  ') }}
+                        {{ config('app.name', 'opdracht  ') }}
                     </a>
                 </div>
 
@@ -44,6 +44,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
+                      <li><a href="{{ url('/home') }}">Home</a></li>
+                      <li><a href="{{ url('/article/add') }}">Add article</a></li>
+                      <li><a href="{{ url('/instructies') }}">Instructies</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
