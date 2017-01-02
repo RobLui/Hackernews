@@ -17,6 +17,7 @@ welcome = main page
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Http\Request;
+use App\Article;
 
 Route::get('/', function () {
     return view('index');
@@ -46,7 +47,13 @@ Route::post('/add', function (Request $request) {
   // dd($request->url); -> geeft "http://www.google.com" terug (wat ik invoerde)
   // dd($request->title); -> geeft "test" (wat ik invoerde)
 
-
+  // Geen fout bij validatie..
+  $article = new Article;
+  // $request title & url gaat de 2 uit de form opvragen
+  $article->title = $request->title;
+  $article->url = $request->url;
+  $article->save();
+  return redirect("/home");
 });
 
 // Delete something from the database {article} = id van article dat gedelete moet worden
