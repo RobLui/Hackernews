@@ -1,15 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Bootstrap Boilerplate... -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                  <div class="panel-heading">Add article</div>
-                    <div class="panel-content">
-        <!-- New article Form - /add wordt achter de link bijgevoegd -->
-        <form action="/add" method="POST" class="form-horizontal">
+<!-- Bootstrap Boilerplate... -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+              <div class="panel-heading">Add article</div>
+                <div class="panel-content">
+<!--  display errors -->
+@include("common.errors")
+            <!-- New article Form - /add wordt achter de link bijgevoegd -->
+            <form action="/add" method="POST" class="form-horizontal">
             {{ csrf_field() }}
             <!-- article title -->
             <div class="form-group">
@@ -34,10 +36,11 @@
                 </div>
             </div>
         </form>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-</div>
-</div>
 </div>
 @endsection
