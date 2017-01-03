@@ -20,7 +20,14 @@ use Illuminate\Http\Request;
 use App\Article;
 
 Route::get('/', function () {
-    return view('index');
+    $articles = Article::orderBy('created_at','asc')->get();
+    // dd($article)->withArticles($articles);
+    return view('index')->withArticles($articles);
+});
+
+Route::get('/home', function () {
+    $articles = Article::orderBy('created_at','asc')->get();
+    return view('home')->withArticles($articles);
 });
 
 Route::get('/instructies', function () {
@@ -35,8 +42,8 @@ Route::get('/article', function () {
 Route::post('/add', function (Request $request) {
   // return "works"; -> test om te zien of de post van /add werkt
   $validator = Validator::make($request->all(),[
-    "title" => 'required|max:255',
-    "url" => 'required|max:255'
+    'title' => 'required|max:255',
+    'url' => 'required|max:255'
   ]);
   // fout bij validatie..
   if ($validator->fails()) {
@@ -62,6 +69,6 @@ Route::delete('/article\{article}', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+// Route::get('/home', 'HomeController@index');
 
 // Route::post('/add', 'ArticleController@index');

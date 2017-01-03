@@ -6,9 +6,11 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-              <div class="panel-heading">Instructies</div>
-                <div class="panel-content">
+              <div class="panel-heading">
+                Instructies
+              </div>
 
+                <div class="panel-content">
                 <h1>Algemeen</h1>
                 <ul>
                     <li>Maak deze opdracht zo goed mogelijk na, het idee is gebaseerd op <a href="http://news.ycombinator.com">Hackernews</a> of <a href="http://www.reddit.com">reddit</a>.</li>
