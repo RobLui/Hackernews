@@ -27,5 +27,10 @@ Route::get('/', 'HomeController@index');
 // Controller for showing articles
 Route::get('/home', 'ArticleController@index');
 
-// Controller for adding articles
+// Controller to add articles
 Route::post('/add', 'ArticleController@AddArticle');
+
+// Controller to edit articles
+Route::post('/edit', 'ArticleController@Edit');
+
+// Route::resource('/home', 'ArticleController');

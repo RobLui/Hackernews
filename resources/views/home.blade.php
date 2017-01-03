@@ -16,6 +16,7 @@
                     <tr>
                       <th>
                           <a href="{{$article->url}}">{{$article->title}}</a>
+                            <a href="article/edit/{{$article->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
                       </th>
                     </tr>
                   </div>

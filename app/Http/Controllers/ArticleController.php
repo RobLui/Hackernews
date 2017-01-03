@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Resources\views\CRUD;
 use Auth;
 use App\Article;
 
@@ -60,7 +62,7 @@ class ArticleController extends Controller
         $article->url = $request->url;
         $article->save();
         }
-          return redirect("/home");
+        return redirect("/home");
     }
 
     public function UpdateArticle(Request $request, $îd){
@@ -74,4 +76,20 @@ class ArticleController extends Controller
       $article->save();
       return redirect("/home")->with("Article edited");
     }
+
+    // Show article with particular id
+    public function Show($id)
+    {
+
+    }
+    // Edit article with particular id
+    public function Edit($id)
+    {
+      return View::make('CRUD.edit');
+    }
+    // Soft delete
+    public function Delete($id){
+
+    }
+
 }
