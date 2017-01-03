@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Resources\views\CRUD;
 use Auth;
 use App\Article;
+use resources\views\articles;
 
 
 class ArticleController extends Controller
@@ -41,19 +42,17 @@ class ArticleController extends Controller
 
         // Check if the user is logged in -> only than, an article can be added
         if (Auth::check()) {
-        // return "works"; -> test om te zien of de post van /add werkt
-        $validator = Validator::make($request->all(),[
+          // return "works"; -> test om te zien of de post van /add werkt
+          $validator = Validator::make($request->all(),[
           'title' => 'required|max:255',
           'url' => 'required|max:255'
         ]);
+
         // fout bij validatie..
         if ($validator->fails()) {
           return redirect('/article')
-          -> withInput($flashed_vals)
           -> withErrors($validator);
         }
-        // dd($request->url); -> geeft "http://www.google.com" terug (wat ik invoerde)
-        // dd($request->title); -> geeft "test" (wat ik invoerde)
 
         // Geen fout bij validatie..
         $article = new Article;
@@ -65,7 +64,15 @@ class ArticleController extends Controller
         return redirect("/home");
     }
 
-    public function UpdateArticle(Request $request, $îd){
+    // Show article with particular id
+    public function Show($id)
+    {
+
+    }
+
+    // Edit article with particular id
+    public function Edit(Request $request, $îd)
+    {
       $validator = Validator::make($request->all(),[
         'title' => 'required|max:255',
         'url' => 'required|max:255'
@@ -74,21 +81,13 @@ class ArticleController extends Controller
       $article->title = $request->title;
       $article->url = $request->url;
       $article->save();
-      return redirect("/home")->with("Article edited");
+      // return redirect("/home")->with("Article edited");
+      return view('/article');
     }
 
-    // Show article with particular id
-    public function Show($id)
-    {
-
-    }
-    // Edit article with particular id
-    public function Edit($id)
-    {
-      return View::make('CRUD.edit');
-    }
     // Soft delete
-    public function Delete($id){
+    public function Delete($id)
+    {
 
     }
 

@@ -12,14 +12,14 @@
               @foreach($articles as $article)
               <ul class="article-overview">
                 <li>
-                  <div class="url">
                     <tr>
                       <th>
-                          <a href="{{$article->url}}">{{$article->title}}</a>
-                            <a href="article/edit/{{$article->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
-                      </th>
+                        <div class="url">
+                            <a href="{{$article->url}}" class="urlTitle">{{$article->title}}</a>
+                            <a href="article/edit/" class="btn btn-primary btn-xs edit-btn">edit</a>
+                          </div>
+                       </th>
                     </tr>
-                  </div>
                 </li>
               </ul>
               @endforeach
