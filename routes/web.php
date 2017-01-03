@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Http\Request;
 use App\Article;
 
-// Route::any('/edit', array('uses' => 'ArticleController@Edit'));
 
 // Simple instruction view, no need for controller right now
 Route::get('/instructies', function () {
@@ -33,9 +32,10 @@ Route::get('/home', 'ArticleController@index');
 Route::post('/add', 'ArticleController@AddArticle');
 
 // Controller to edit articles
-Route::get('article/edit', function () {
-    // Session::flash('values', $passvalues);
-    // $oldinput = Session::get('values');
-    return view('articles/edit');
-    // ->with($oldinput);
-});
+// ----------------DEZE WERKT-------------------
+// Route::get('article/edit', function () {
+//     return view('articles/edit');
+// });
+ // --------------------------------------------
+ // add id param to route, makes working with the id possible! :)
+ Route::get('article/edit/{id}', 'ArticleController@Edit');

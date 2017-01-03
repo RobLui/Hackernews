@@ -71,18 +71,23 @@ class ArticleController extends Controller
     }
 
     // Edit article with particular id
-    public function Edit(Request $request, $îd)
+    public function Edit(Request $request)
     {
+
       $validator = Validator::make($request->all(),[
         'title' => 'required|max:255',
         'url' => 'required|max:255'
       ]);
-      $article = Article::find($id);
-      $article->title = $request->title;
-      $article->url = $request->url;
-      $article->save();
-      // return redirect("/home")->with("Article edited");
-      return view('/article');
+
+      $article = new Article;
+
+      // $article->id = $request->id;
+      // $article->title = $request->title;
+      // $article->url = $request->url;
+      // $article->save();
+
+      // $passvalues = Input::all();
+      return view("/articles/edit");
     }
 
     // Soft delete
