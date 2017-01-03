@@ -1,19 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-/*
-welcome = main page
-*/
-
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Http\Request;
@@ -42,4 +28,4 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'ArticleController@index');
 
 // Controller for adding articles
-Route::post('/add', 'ArticleController@addArticle');
+Route::post('/add', 'ArticleController@AddArticle');

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Auth;
 use App\Article;
 
 
@@ -35,7 +35,10 @@ class ArticleController extends Controller
     }
 
     // Add articles to database
-    public function addArticle(Request $request){
+    public function AddArticle(Request $request){
+
+        // Check if the user is logged in -> only than, an article can be added
+        if (Auth::check()) {
         // return "works"; -> test om te zien of de post van /add werkt
         $validator = Validator::make($request->all(),[
           'title' => 'required|max:255',
@@ -56,9 +59,19 @@ class ArticleController extends Controller
         $article->title = $request->title;
         $article->url = $request->url;
         $article->save();
-        return redirect("/home");
+        }
+          return redirect("/home");
     }
 
-
-
+    public function UpdateArticle(Request $request, $îd){
+      $validator = Validator::make($request->all(),[
+        'title' => 'required|max:255',
+        'url' => 'required|max:255'
+      ]);
+      $article = Article::find($id);
+      $article->title = $request->title;
+      $article->url = $request->url;
+      $article->save();
+      return redirect("/home")->with("Article edited");
+    }
 }
