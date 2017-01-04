@@ -9,6 +9,7 @@
           <br><br>
             <div class="panel panel-default">
               <div class="panel-heading">Add article</div>
+              <br>
                 <div class="panel-content">
                 <!--  display errors -->
                 @include("common.errors")

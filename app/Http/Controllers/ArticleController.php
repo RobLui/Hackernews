@@ -55,12 +55,6 @@ class ArticleController extends Controller
         return redirect("/home");
     }
 
-    // Show article with particular id
-    public function Show($id)
-    {
-
-    }
-
     // Edit article with particular id
     public function Edit(Request $request)
     {
@@ -76,11 +70,5 @@ class ArticleController extends Controller
       // $article->save();
       // $passvalues = Input::all();
       return view("/articles/edit");
-    }
-
-    // Soft delete
-    public function Delete($id)
-    {
-
     }
 }

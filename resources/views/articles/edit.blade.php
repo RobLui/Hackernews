@@ -9,6 +9,7 @@
           <br><br>
             <div class="panel panel-default">
               <div class="panel-heading">Edit article</div>
+              <br>
                 <div class="panel-content">
 
                 <!--  display errors -->
