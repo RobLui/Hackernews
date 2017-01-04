@@ -13,7 +13,7 @@
 <!--  display errors -->
 @include("common.errors")
             <!-- New article Form - /add wordt achter de link bijgevoegd -->
-            <form action="/add" method="POST" class="form-horizontal">
+            <form action="{{ url('article/add') }}" method="POST" class="form-horizontal">
             {{ csrf_field() }}
             <!-- article title -->
             <div class="form-group">

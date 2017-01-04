@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Http\Request;
@@ -10,8 +8,6 @@ use Resources\views\CRUD;
 use Auth;
 use App\Article;
 use resources\views\articles;
-
-
 class ArticleController extends Controller
 {
     /**
@@ -21,9 +17,7 @@ class ArticleController extends Controller
      */
     public function __construct()
     {
-
     }
-
     /**
      * Show the Article dashboard.
      *
@@ -39,7 +33,6 @@ class ArticleController extends Controller
 
     // Add articles to database
     public function AddArticle(Request $request){
-
         // Check if the user is logged in -> only than, an article can be added
         if (Auth::check()) {
           // return "works"; -> test om te zien of de post van /add werkt
@@ -47,13 +40,11 @@ class ArticleController extends Controller
           'title' => 'required|max:255',
           'url' => 'required|max:255'
         ]);
-
         // fout bij validatie..
         if ($validator->fails()) {
-          return redirect('/article')
+          return redirect('/article/add')
           -> withErrors($validator);
         }
-
         // Geen fout bij validatie..
         $article = new Article;
         // $request title & url gaat de 2 uit de form opvragen
@@ -73,19 +64,15 @@ class ArticleController extends Controller
     // Edit article with particular id
     public function Edit(Request $request)
     {
-
       $validator = Validator::make($request->all(),[
         'title' => 'required|max:255',
         'url' => 'required|max:255'
       ]);
-
       $article = new Article;
-
       // $article->id = $request->id;
       // $article->title = $request->title;
       // $article->url = $request->url;
       // $article->save();
-
       // $passvalues = Input::all();
       return view("/articles/edit");
     }
@@ -95,5 +82,4 @@ class ArticleController extends Controller
     {
 
     }
-
 }
