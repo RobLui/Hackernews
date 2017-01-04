@@ -15,7 +15,7 @@
                 @include("common.errors")
 
                 <!-- Edit -->
-                <form action="article/edit" method="PUT" class="form-horizontal">
+                <form action="{{ url('article/edit') }}" method="PUT" class="form-horizontal">
                     {{ csrf_field() }}
                     <!-- article title -->
                     <div class="form-group">

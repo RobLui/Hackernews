@@ -69,6 +69,7 @@ class ArticleController extends Controller
         'url' => 'required|max:255'
       ]);
       $article = new Article;
+
       // $article->id = $request->id;
       // $article->title = $request->title;
       // $article->url = $request->url;
