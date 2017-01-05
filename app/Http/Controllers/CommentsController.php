@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
-use App\Post;
 use Session;
+use App\Article;
 
 class CommentsController extends Controller
 {
@@ -14,9 +14,16 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request,$id)
     {
-        //
+      $comments = Comment::orderBy('created_at','asc')->get();
+      $article = new Article;
+      // $request title & url gaat de 2 uit de form opvragen
+      $article->title = $request->title;
+      $article->url = $request->url;
+      return view('comments/show')
+        ->withComments($comments)
+        ->withArticles($article,["title","url"]);
     }
 
     /**
@@ -50,7 +57,7 @@ class CommentsController extends Controller
         Session::flash('success', 'Comment was added');
         return redirect("/home");
     }
-    }
+
 
     /**
      * Display the specified resource.

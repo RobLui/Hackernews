@@ -25,16 +25,11 @@ Route::get('/home', 'ArticleController@index');
 // Controller to add articles
 Route::post('/article/add', 'ArticleController@AddArticle');
 
+// Controller to add comments
+Route::get('/comments/{id}', 'CommentsController@index');
+
 // Add id param to route, makes working with the id possible! :)
 Route::get('article/edit/{id}', 'ArticleController@Edit');
 
-// Route::get('article/comments/{id}', 'CommentsControllerC@index');
-Route::get('comments/{id}', function () {
-    return view('comments/show');
-});
-// ----------------DEZE WERKT-------------------
-// Controller to edit articles
-// Route::get('article/edit', function () {
-//     return view('articles/edit');
-// });
-// --------------------------------------------
+// Used for later on deleting?
+Route::post('article/edit/{id}', 'ArticleController@Delete');

@@ -5,11 +5,31 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+          @if (true)
+          <div class="bg-danger clearfix">
+            <br>
+              Are you sure you want to delete this article?
+              <form action="{{ url('article/edit')}}/" method="post" class="pull-right">
+                <input type="hidden" name="_token">
+                {{ csrf_field() }}
+                <button name="delete" class="btn btn-danger" value="7">
+                    <i class="fa fa-btn fa-trash" title="delete"></i> confirm delete
+                </button>
+                <button name="cancel" class="btn" value="7">
+                    <i class="fa fa-btn fa-trash" title="delete"></i> cancel
+                </button>
+              </form>
+            </div>
+          @endif();
           <a href="/../home">← back to overview</a>
-          <br><br>
-            <div class="panel panel-default">
-              <div class="panel-heading">Edit article</div>
-              <br>
+            <br><br>
+              <div class="panel panel-default">
+                <div class="panel-heading">Edit article
+                  <a href="{{ url('article/edit/') }}" class="btn btn-danger btn-xs pull-right">
+                    <i class="fa fa-btn fa-trash" title="delete" id="submit_delete"></i> delete article
+                  </a>
+                </div>
+                <br>
                 <div class="panel-content">
 
                 <!--  display errors -->

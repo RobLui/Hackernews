@@ -4,10 +4,10 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Resources\views\CRUD;
 use Auth;
 use App\Article;
 use resources\views\articles;
+
 class ArticleController extends Controller
 {
     /**
@@ -28,7 +28,12 @@ class ArticleController extends Controller
     public function index()
     {
       $articles = Article::orderBy('created_at','asc')->get();
-      return view('home')->withArticles($articles);
+      return view('/home')->withArticles($articles);
+    }
+
+    public function editIndex(){
+      $articles = Article::orderBy('created_at','asc')->get();
+      return view('/home')->withArticles($articles);
     }
 
     // Add articles to database
@@ -55,6 +60,16 @@ class ArticleController extends Controller
         return redirect("/home");
     }
 
+    public function Delete(Request $request,$id){
+
+      // $request title & url gaat de 2 uit de form opvragen
+      $article= Article::findOrFail($id);
+      $article->title = $request->title;
+      $article->url = $request->url;
+      $article->delete();
+      return redirect('/home');
+    }
+
     // Edit article with particular id
     public function Edit(Request $request)
     {
@@ -62,13 +77,6 @@ class ArticleController extends Controller
         'title' => 'required|max:255',
         'url' => 'required|max:255'
       ]);
-      $article = new Article;
-
-      // $article->id = $request->id;
-      // $article->title = $request->title;
-      // $article->url = $request->url;
-      // $article->save();
-      // $passvalues = Input::all();
       return view("/articles/edit");
     }
 }
