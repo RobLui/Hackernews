@@ -5,11 +5,14 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+          <!--  Deze true moet nog een vergelijking worden die ervoor zorgt dat de data enkel te zien is wanneer de andere delete knop is ingedrukt -->
           @if (true)
           <div class="bg-danger clearfix">
             <br>
               Are you sure you want to delete this article?
-              <form action="{{ url('article/edit')}}/" method="post" class="pull-right">
+              <!--  Deze action moet nog de juiste id meekrijgen dat er verwijdert moet worden, enkel moet de verwijdering nog een soft delete worden -->
+              <!-- URL VOOR DELETE ARTICLE, U SURE? ------------------------->
+              <form action="../edit/delete" method="post" class="pull-right">
                 <input type="hidden" name="_token">
                 {{ csrf_field() }}
                 <button name="delete" class="btn btn-danger" value="7">
@@ -20,13 +23,15 @@
                 </button>
               </form>
             </div>
-          @endif();
+          @endif()
+          <br>
           <a href="/../home">← back to overview</a>
             <br><br>
               <div class="panel panel-default">
                 <div class="panel-heading">Edit article
+                  <!-- URL VOOR DELETE ARTICLE ------------------------->
                   <a href="{{ url('article/edit/') }}" class="btn btn-danger btn-xs pull-right">
-                    <i class="fa fa-btn fa-trash" title="delete" id="submit_delete"></i> delete article
+                    <i class="fa fa-btn fa-trash" title="delete"></i> delete article
                   </a>
                 </div>
                 <br>
