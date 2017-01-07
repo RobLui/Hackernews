@@ -26,10 +26,10 @@ Auth::routes();
   Route::get('article/edit/{id}', 'ArticleController@Edit');
   // Controller to add articles
   Route::post('/article/add', 'ArticleController@Add');
-  // Contoller to delete articles
-  Route::get('article/delete/{id}', 'ArticleController@Delete');
   // Test
-  Route::post('article/delete/{id}', 'ArticleController@delete_test');
+  Route::get('article/delete/{id}', 'ArticleController@Delete');
+  // Contoller to delete articles
+  Route::post('article/delete/{id}', 'ArticleController@Delete');
 
 
 // COMMENTS

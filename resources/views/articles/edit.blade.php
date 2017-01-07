@@ -10,15 +10,14 @@
             <br>
               Are you sure you want to delete this article?
               <!--  Deze action moet nog de juiste id meekrijgen dat er verwijdert moet worden, enkel moet de verwijdering nog een soft delete worden -->
-              <!-- URL VOOR DELETE ARTICLE, U SURE? ------------------------->
-              <form action="../delete/8" method="POST" class="pull-right">
+              <form action="../delete/<?= basename($_SERVER["PHP_SELF"]); ?>" method="POST" class="pull-right">
                 {{ csrf_field() }}
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <button name="delete" class="btn btn-danger" value="7">
                     <i class="fa fa-btn fa-trash" title="delete"></i> confirm delete
                 </button>
                 <button name="cancel" class="btn" value="7">
-                    <i class="fa fa-btn fa-trash" title="delete"></i> cancel
+                    <i class="fa fa-btn fa-trash" title="cancel"></i> cancel
                 </button>
               </form>
             </div>
@@ -36,7 +35,7 @@
               <div class="panel panel-default">
                 <div class="panel-heading">Edit article
                   <!-- URL VOOR DELETE ARTICLE ------------------------->
-                  <a href="../delete/" class="btn btn-danger btn-xs pull-right">
+                  <a href="../delete/" class="btn btn-danger   btn-xs pull-right">
                     <i class="fa fa-btn fa-trash"></i> delete article
                   </a>
                 </div>
@@ -47,8 +46,9 @@
                 @include("common.errors")
 
                 <!-- Edit -->
-                <form action="{{ url('article/edit/{$id}') }}" method="POST" class="form-horizontal">
+                <form action="../edit/" method="POST" class="form-horizontal">
                     {{ csrf_field() }}
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}"> <!-- mismatch token error fix -->
                     <!-- article title -->
                     <div class="form-group">
                       <label for="titel" class="col-sm-3 control-label">Title (max 255 chars)</label>

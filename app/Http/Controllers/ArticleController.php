@@ -4,12 +4,13 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Auth;
-use App\Article;
 use resources\views\articles;
+use App\Article;
+use Auth;
 use Route;
 use View;
 use PDO;
+
 class ArticleController extends Controller
 {
     public function __construct()
@@ -28,77 +29,69 @@ class ArticleController extends Controller
     public function Add(Request $request){
         // Check if the user is logged in -> only than, an article can be added
         if (Auth::check()) {
-          // return "works"; -> test om te zien of de post van /add werkt
+          // Validation handler
           $validator = Validator::make($request->all(),[
           'title' => 'required|max:255',
           'url' => 'required|max:255'
         ]);
-        // fout bij validatie..
+        // Validation error, show errors
         if ($validator->fails()) {
           return view('/articles/add')
           -> withErrors($validator);
         }
-        // Geen fout bij validatie..
+        // No validation error, continue..
         $article = new Article;
-        // $request title & url gaat de 2 uit de form opvragen
+        // $request title & url = get data from both out of the submitted form
         $article->title = $request->title;
         $article->url = $request->url;
+        // Save into db
         $article->save();
         }
         return redirect("/home");
     }
 
+
     public function Delete(Request $req,$id)
     {
-      $article = new Article;
-       // TEST EDIT FUNCTION - has to become fully functionable still
-       // $request title & url gaat de 2 uit de form opvragen
-       $article->title = $req->title;
-       $article->url = $req->url;
+      // $article = new Article;
+      $article = Article::orderBy('created_at','asc')->get();
+      // $article_found_id = Article::find($id);
+      $_SESSION["id"] = $id;
+      $article->title = $req->title;
+      $article->url = $req->url;
       // $article_id = $req->$id;
-      // $article_found_id = Article::find($article_id);
       // // $article->id = $req->id;
-      // // $request title & url gaat de 2 uit de form opvragen
-      // // $article->id = $request->id;
-      // // $article->title = $req->title;
-      // // $article->url = $req->url;
-      // $articles = Article::orderBy('created_at','asc')->get();
-      // return redirect('home')
-      // ->withArticles($articles);
       try {
-      // Maak een connectie met de lokale MySQL server en selecteer de database bieren
-      $db = new PDO('mysql:host=localhost;dbname=opdracht', 'root','');
-      //Als er op de delete knop wordt gedrukt..
-         //query to do in db
-         $db_delete_query	=	'DELETE FROM articles WHERE id = :id';
-         $db_del_access = $db->prepare($db_delete_query);
-         $db_del_access->bindValue('id',$id);
-         $db_del_access->execute();
-         //link met db
+       // Establish connection & connect to db opdracht
+       $db = new PDO('mysql:host=localhost;dbname=opdracht', 'root','');
+       //Delete query
+       $db_delete_query	=	'DELETE FROM articles WHERE id = :id';
+       $db_del_access = $db->prepare($db_delete_query);
+       $db_del_access->bindValue('id',$id);
+       $db_del_access->execute();
+       //link met db
        }
        catch (Exception $e) {
         $e->getMessage();
       }
-      return redirect("home");
+      return redirect('/home')->withArticles($article);
     }
 
     public function delete_test()
     {
-      $articles = Article::orderBy('created_at','asc')->get();
-      // $article->save();
-
-      View::share('article/delete/',$articles);
-      view('/home')->withArticles( "hello world");
+      $article = Article::orderBy('created_at','asc')->get();
+      return view('/home')->withArticles($article);
     }
       // Edit article with particular id
     public function Edit(Request $request)
     {
-      $article = new Article;
+      $article = Article::orderBy('created_at','asc')->get();
       // TEST EDIT FUNCTION - has to become fully functionable still
       // $request title & url gaat de 2 uit de form opvragen
       $article->title = $request->title;
       $article->url = $request->url;
-      return view("articles/edit")->withInput($article);
+      $article->id = $request->id;
+      return view("articles/edit")->withArticles($article);
       // ->withArticles($article);
     }
   }
