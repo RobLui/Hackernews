@@ -22,25 +22,17 @@ Auth::routes();
   Route::get('/home', 'HomeController@index');
 
 // ARTICLES
-  // Add id param to route, makes working with the id possible! :)
+  // SHOW EDIT view
   Route::get('article/edit/{id}', 'ArticleController@index_edit');
-  // EDIT article
-  Route::post('article/edit/{id}', 'ArticleController@Edit');
   // ADD article
   Route::post('/article/add', 'ArticleController@Add');
-  // Test
-  Route::get('article/delete/{id}', 'ArticleController@Delete');
-  // Contoller to delete articles
+  // EDIT article
+  Route::post('article/edit/{id}', 'ArticleController@Edit');
+  // DELETE articles
   Route::post('article/delete/{id}', 'ArticleController@Delete');
 
-
 // COMMENTS
-  // Controller to add comments
+  // SHOW COMMENT view
   Route::get('/comments/{id}', 'CommentsController@index');
-
-//
-//   Route::delete('article/delete/{id}', [
-//     'uses'      => 'TodoController@destroy',
-//     'as'        => 'todo.destroy',
-//     'protected' => true
-// ]);
+  // ADD comments
+  Route::post('/comments/add/{id}', 'CommentsController@Add');

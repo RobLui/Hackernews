@@ -30,7 +30,8 @@ class ArticleController extends Controller
       $articles = Article::where("id", '=', $id)->get()->first();
       return view("articles/edit")->withArticles($articles);
     }
-    // Add articles to database
+
+    // Add article
     public function Add(Request $request){
         // Check if the user is logged in -> only than, an article can be added
         if (Auth::check()) {
@@ -56,37 +57,7 @@ class ArticleController extends Controller
     }
 
 
-    public function Delete(Request $req,$id)
-    {
-      // $article = new Article;
-      $article = Article::orderBy('created_at','asc')->get();
-      // $article_found_id = Article::find($id);
-      $article->title = $req->title;
-      $article->url = $req->url;
-      // $article_id = $req->$id;
-      // // $article->id = $req->id;
-      try {
-       // Establish connection & connect to db opdracht
-       $db = new PDO('mysql:host=localhost;dbname=opdracht', 'root','');
-       //Delete query
-       $db_delete_query	=	'sDELETE FROM articles WHERE id = :id';
-       $db_del_access = $db->prepare($db_delete_query);
-       $db_del_access->bindValue('id',$id);
-       $db_del_access->execute();
-       //link met db
-       }
-       catch (Exception $e) {
-        $e->getMessage();
-      }
-      return redirect('/home')->withArticles($article);
-    }
-
-    public function delete_test()
-    {
-      $article = Article::orderBy('created_at','asc')->get();
-      return view('/home')->withArticles($article);
-    }
-      // Edit article with particular id
+    // EDIT article
     public function Edit(Request $request,$id)
     {
       $articles = Article::all();
@@ -107,5 +78,30 @@ class ArticleController extends Controller
         $e->getMessage();
       }
       return redirect('/home')->withArticles($articles);
+    }
+
+    public function Delete(Request $req,$id)
+    {
+      // $article = new Article;
+      $article = Article::orderBy('created_at','asc')->get();
+      // $article_found_id = Article::find($id);
+      $article->title = $req->title;
+      $article->url = $req->url;
+      // $article_id = $req->$id;
+      // // $article->id = $req->id;
+      try {
+       // Establish connection & connect to db opdracht
+       $db = new PDO('mysql:host=localhost;dbname=opdracht', 'root','');
+       //Delete query
+       $db_delete_query	=	'DELETE FROM articles WHERE id = :id';
+       $db_del_access = $db->prepare($db_delete_query);
+       $db_del_access->bindValue('id',$id);
+       $db_del_access->execute();
+       //link met db
+       }
+       catch (Exception $e) {
+        $e->getMessage();
+      }
+      return redirect('/home')->withArticles($article);
     }
   }

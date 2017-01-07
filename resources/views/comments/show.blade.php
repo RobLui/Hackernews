@@ -14,6 +14,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
           Article: how do comments work?
+<!-- NOG AAN TE PASSEN -->
           <a href="/article/delete" class="btn btn-danger btn-xs pull-right">
             <i class="fa fa-btn fa-trash" title="delete"></i> delete article
           </a>
@@ -31,7 +32,8 @@
           <!--  URL -->
           <div class="url">
             <!--  ID nog aanpassen naar welke aan te passen -->
-              <a href="/article/edit/{$articles->id}" class="btn btn-primary btn-xs edit-btn">edit</a>
+<!-- NOG AAN TE PASSEN -->
+              <a href="/article/edit/{$article->id}" class="btn btn-primary btn-xs edit-btn">edit</a>
           </div>
           <!--  Info -->
           <div class="info">
@@ -44,16 +46,16 @@
             </div>
           </div>
 
-            <!--  CAN POST TO PASCAL's WEBSITE :P with these placeholders :D -->
-            <!-- New Task Form -->
-
-            <form action="http://pascalculator.be/hackernews/public/comments/add" method="POST" class="form-horizontal" pmbx_context="56C6939A-0F81-498C-8484-F80FB3563DF9">
-            <input type="hidden" name="_token" value="nr3Wp9VFlPbNRwMWUhMHSLqbeZ3oP98qB61DPSNa" pmbx_context="70857244-9F2B-4BDB-828C-0E802CDECE72">
-
+            <!-- ADD comment -->
+            <form action="/comments/add/{{$articles->id}}" method="POST" class="form-horizontal">
+              {{ csrf_field() }}
+              <input type="hidden" name="_token" value="{{ csrf_token() }}"> <!-- mismatch token error fix -->
             <!-- Comment data -->
             <div class="form-group">
               <label for="body" class="col-sm-3 control-label">Comment</label>
-              <div class="col-sm-6"><textarea type="text" name="body" id="body" class="form-control"></textarea></div>
+              <div class="col-sm-6">
+                <textarea type="text" name="comment" id="comment" class="form-control"></textarea>
+              </div>
             </div>
             <input type="hidden" name="article_id" value="5" pmbx_context="DB3B124C-4CD3-4DB1-833A-171DAB46884E">
 
