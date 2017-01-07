@@ -25,6 +25,11 @@ class ArticleController extends Controller
       return view('/home')->withArticles($articles);
     }
 
+    public function index_edit(Request $request,$id){
+      $articles = Article::all();
+      $articles = Article::where("id", '=', $id)->get()->first();
+      return view("articles/edit")->withArticles($articles);
+    }
     // Add articles to database
     public function Add(Request $request){
         // Check if the user is logged in -> only than, an article can be added
@@ -56,7 +61,6 @@ class ArticleController extends Controller
       // $article = new Article;
       $article = Article::orderBy('created_at','asc')->get();
       // $article_found_id = Article::find($id);
-      $_SESSION["id"] = $id;
       $article->title = $req->title;
       $article->url = $req->url;
       // $article_id = $req->$id;
@@ -65,7 +69,7 @@ class ArticleController extends Controller
        // Establish connection & connect to db opdracht
        $db = new PDO('mysql:host=localhost;dbname=opdracht', 'root','');
        //Delete query
-       $db_delete_query	=	'DELETE FROM articles WHERE id = :id';
+       $db_delete_query	=	'sDELETE FROM articles WHERE id = :id';
        $db_del_access = $db->prepare($db_delete_query);
        $db_del_access->bindValue('id',$id);
        $db_del_access->execute();
@@ -83,15 +87,25 @@ class ArticleController extends Controller
       return view('/home')->withArticles($article);
     }
       // Edit article with particular id
-    public function Edit(Request $request)
+    public function Edit(Request $request,$id)
     {
-      $article = Article::orderBy('created_at','asc')->get();
-      // TEST EDIT FUNCTION - has to become fully functionable still
-      // $request title & url gaat de 2 uit de form opvragen
-      $article->title = $request->title;
-      $article->url = $request->url;
-      $article->id = $request->id;
-      return view("articles/edit")->withArticles($article);
-      // ->withArticles($article);
+      $articles = Article::all();
+      $articles = Article::where("id", '=', $id)->get()->first();
+      try {
+       // Establish connection & connect to db opdracht
+       $db = new PDO('mysql:host=localhost;dbname=opdracht', 'root','');
+       //Delete query
+       $db_delete_query	=	'UPDATE articles SET title=:title, url=:url WHERE id = :id';
+       $db_del_access = $db->prepare($db_delete_query);
+       $db_del_access->bindValue('id',$id);
+       $db_del_access->bindValue('url',$request->url);
+       $db_del_access->bindValue('title',$request->title);
+       $db_del_access->execute();
+       //link met db
+       }
+       catch (Exception $e) {
+        $e->getMessage();
+      }
+      return redirect('/home')->withArticles($articles);
     }
   }

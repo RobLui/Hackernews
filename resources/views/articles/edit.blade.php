@@ -9,7 +9,7 @@
           <div class="bg-danger clearfix">
             <br>
               Are you sure you want to delete this article?
-              <!--  Deze action moet nog de juiste id meekrijgen dat er verwijdert moet worden, enkel moet de verwijdering nog een soft delete worden -->
+              <!--  Working delete =D -->
               <form action="../delete/<?= basename($_SERVER["PHP_SELF"]); ?>" method="POST" class="pull-right">
                 {{ csrf_field() }}
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -22,22 +22,15 @@
               </form>
             </div>
           <br>
+          <!-- @if(isset($_SESSION["test"])) -->
+          <!-- @endif() -->
           <a href="/../home">← back to overview</a>
-          <!-- <form action="http://localhost:8000/article/edit/delete/8" method="POST" class="pull-right">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <button type="submit" >Delete</button>
-          </form> -->
-          <!-- <form action="http://localhost:8000/article/edit/8" method="POST" class="pull-right">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <button type="submit" name="delete_confirm" >DELETE CONFIRM</button>
-          </form> -->
             <br><br>
               <div class="panel panel-default">
                 <div class="panel-heading">Edit article
-                  <!-- URL VOOR DELETE ARTICLE ------------------------->
-                  <a href="../delete/" class="btn btn-danger   btn-xs pull-right">
-                    <i class="fa fa-btn fa-trash"></i> delete article
-                  </a>
+                  <!--  Delete article button -->
+                  <a href="<?= basename($_SERVER["PHP_SELF"]); ?>" class="btn btn-danger btn-xs pull-right">
+                    <i class="fa fa-btn fa-trash"></i> delete article</a>
                 </div>
                 <br>
                 <div class="panel-content">
@@ -46,21 +39,21 @@
                 @include("common.errors")
 
                 <!-- Edit -->
-                <form action="../edit/" method="POST" class="form-horizontal">
+                <form action="../edit/<?= basename($_SERVER["PHP_SELF"]); ?>" method="POST" class="form-horizontal">
                     {{ csrf_field() }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"> <!-- mismatch token error fix -->
                     <!-- article title -->
                     <div class="form-group">
                       <label for="titel" class="col-sm-3 control-label">Title (max 255 chars)</label>
                       <div class="col-sm-6">
-                          <input type="text" name="title" id="title" class="form-control" value="">
+                          <input type="text" name="title" id="title" class="form-control" value="{{$articles->title}}">
                       </div>
                     </div>
                     <!-- article url -->
                     <div class="form-group">
                       <label for="url" class="col-sm-3 control-label">URL</label>
                       <div class="col-sm-6">
-                          <input type="text" name="url" id="url" class="form-control">
+                          <input type="text" name="url" id="url" class="form-control" value="{{$articles->url}}">
                       </div>
                     </div>
                     <!-- Edit article Button -->

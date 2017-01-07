@@ -23,8 +23,10 @@ Auth::routes();
 
 // ARTICLES
   // Add id param to route, makes working with the id possible! :)
-  Route::get('article/edit/{id}', 'ArticleController@Edit');
-  // Controller to add articles
+  Route::get('article/edit/{id}', 'ArticleController@index_edit');
+  // EDIT article
+  Route::post('article/edit/{id}', 'ArticleController@Edit');
+  // ADD article
   Route::post('/article/add', 'ArticleController@Add');
   // Test
   Route::get('article/delete/{id}', 'ArticleController@Delete');
