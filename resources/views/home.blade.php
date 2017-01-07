@@ -12,7 +12,6 @@
               @foreach($articles as $article)
               <ul class="article-overview">
                 <li>
-
                   <!--  Placeholders for later buttons, wont work yet -->
                   <!-- <div class="vote">
                     <div class="form-inline upvote">
@@ -32,6 +31,10 @@
                         <div class="url">
                           <a href="{{$article->url}}" class="urlTitle">{{$article->title}}</a>
                           <a href="article/edit/{{$article->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
+                          <div class="test">
+
+                          </div>
+
                         </div>
                         <div class="info">
                           <!--  Placeholder for later data -->
@@ -45,6 +48,7 @@
             @endif
           </div>
         </div>
+        {{ $article }}
       </div>
     </div>
   </div>
