@@ -39,6 +39,7 @@
                 @include("common.errors")
 
                 <!-- Edit -->
+
                 <form action="../edit/<?= basename($_SERVER["PHP_SELF"]); ?>" method="POST" class="form-horizontal">
                     {{ csrf_field() }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"> <!-- mismatch token error fix -->

@@ -8,6 +8,9 @@
       <div class="panel panel-default">
         <div class="panel-heading">Article overview</div>
           <div class="panel-body">
+            <div class>
+
+            </div>
             @if (count($articles) > 0)
               @foreach($articles as $article)
               <ul class="article-overview">
@@ -30,14 +33,10 @@
                         <div class="url">
                           <a href="{{$article->url}}" class="urlTitle">{{$article->title}}</a>
                           <a href="article/edit/{{$article->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
-                          <div class="test">
-
-                          </div>
-
                         </div>
                         <div class="info">
                           <!--  Placeholder for later data -->
-                          3 points  | posted by <?= $article->id  ?> | <a href="comments/{{$article->id}}">2 comments</a>
+                          3 points  | posted by {{$users->name}} | <a href="comments/{{$article->id}}">2 comments</a>
                         </div>
                       </th>
                     </tr>

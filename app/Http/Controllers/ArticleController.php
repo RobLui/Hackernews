@@ -21,8 +21,8 @@ class ArticleController extends Controller
     //  Show articles
     public function index()
     {
-      $articles = Article::orderBy('created_at','asc')->get();
-      return view('/home')->withArticles($articles);
+      $article = Article::orderBy('created_at','asc')->get();
+      return view('index')->withArticles($article);
     }
 
     public function index_edit(Request $request,$id){
