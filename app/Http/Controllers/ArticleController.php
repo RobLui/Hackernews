@@ -32,10 +32,14 @@ class ArticleController extends Controller
             'title' => 'required|max:255',
             'url' => 'required|max:255'
           ]);
-          // Validation error, show errors
+          // Validation error, show errors, check for valid email through regEX
           if ($validator->fails()) {
             return view('/articles/add')
             -> withErrors($validator);
+          }
+          if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$request->url)) {
+            return view('/articles/add')
+            -> withErrors($request->url . " is not a valid URL");
           }
           // No validation error, continue..
           $articles = new Article;
