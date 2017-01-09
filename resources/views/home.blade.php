@@ -36,7 +36,7 @@
                         </div>
                         <div class="info">
                           <!--  Placeholder for later data -->
-                          3 points  | posted by user | <a href="comments/{{$article->id}}">2 comments</a>
+                          3 points  | posted by {{$article->posted_by}} | <a href="comments/{{$article->id}}">2 comments</a>
                         </div>
                       </th>
                     </tr>

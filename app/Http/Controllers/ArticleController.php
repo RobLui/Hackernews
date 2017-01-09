@@ -7,9 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use resources\views\articles;
 use App\Article;
 use Auth;
-use Route;
-use View;
-use PDO;
+// use PDO;
 
 class ArticleController extends Controller
 {
@@ -44,6 +42,7 @@ class ArticleController extends Controller
           // $request title & url = get data from both out of the submitted form
           $articles->title = $request->title;
           $articles->url = $request->url;
+          $articles->posted_by = "test";
           // Save into db
           $articles->save();
           }
@@ -107,7 +106,6 @@ class ArticleController extends Controller
     //     }
     //     return redirect("/home");
     // }
-
 
   // EDIT article
     // public function edit(Request $request,$id)
