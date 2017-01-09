@@ -64,10 +64,30 @@ class ArticleController extends Controller
       $articles = Article::findOrFail($id);
       // Check if the user is logged in -> only than, an article can be updated
       if (Auth::check()) {
+        {
+              // Check if the user is logged in -> only than, an article can be added
+              if (Auth::check()) {
+                // Validation handler
+                $validator = Validator::make($req->all(),[
+                'title' => 'required|max:255',
+                'url' => 'required|max:255'
+              ]);
+              // Validation error, show errors
+              if ($validator->fails()) {
+                return view('/articles/add')
+                -> withErrors($validator);
+              }
+              // Check for valid email through regEX
+              if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$req->url)) {
+                return view('/articles/add')
+                -> withErrors($req->url . " is not a valid URL");
+              }
         $articles->update($req->all());
       }
       return redirect("/home");
     }
+  }
+}
     // ELOQUENT DELETE
     public function delete(Request $req, $id)
     {
