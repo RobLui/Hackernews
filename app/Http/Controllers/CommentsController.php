@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
-use Session;
 use App\Article;
 
 class CommentsController extends Controller

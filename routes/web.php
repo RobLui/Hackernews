@@ -21,18 +21,28 @@ Auth::routes();
   // Home controller showing articles @ home
   Route::get('/home', 'HomeController@index');
 
-// ARTICLES
+// ARTICLES -------- ELOQUENT METHODS ----- PASCAL's REQUEST :-)
   // SHOW EDIT view
-  Route::get('article/edit/{id}', 'ArticleController@index_edit');
+  Route::get('article/edit/{id}', 'ArticleController@edit');
   // ADD article
-  Route::post('/article/add', 'ArticleController@Add');
-  // EDIT article
-  Route::post('article/edit/{id}', 'ArticleController@Edit');
+  Route::post('/article/add', 'ArticleController@create');
+  // UPDATE article
+  Route::post('article/edit/{id}', 'ArticleController@update');
   // DELETE articles
-  Route::post('article/delete/{id}', 'ArticleController@Delete');
+  Route::post('article/delete/{id}', 'ArticleController@delete');
 
 // COMMENTS
   // SHOW COMMENT view
   Route::get('/comments/{id}', 'CommentsController@index');
   // ADD comments
   Route::post('/comments/add/{id}', 'CommentsController@Add');
+
+  // ARTICLES - OLD WORKING FUNCTIONS USING PDO
+    // SHOW EDIT view
+    // Route::get('article/edit/{id}', 'ArticleController@index_edit');
+    // ADD article
+    // Route::post('/article/add', 'ArticleController@Add');
+    // EDIT article
+    // Route::post('article/edit/{id}', 'ArticleController@Edit');
+    // DELETE articles
+    // Route::post('article/delete/{id}', 'ArticleController@Delete');
