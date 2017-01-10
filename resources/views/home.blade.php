@@ -8,47 +8,37 @@
       <div class="panel panel-default">
         <div class="panel-heading">Article overview</div>
           <div class="panel-body">
-            <div class>
-
-            </div>
             @if (count($articles) > 0)
               @foreach($articles as $article)
               <ul class="article-overview">
-                <li>
-                  <!--  Placeholders for later buttons, wont work yet -->
-                  <!-- <div class="vote">
-                    <div class="form-inline upvote">
-                      <button name="article_id" value="1">
-                        <i class="fa fa-btn fa-caret-up disabled upvote"</i>
-                      </button>
+               <li>
+                <div class="vote">
+                 <tr>
+                  <th>
+                    <div class="url">
+                      <div class="form-inline upvote"><button class="up-down">
+                         <i class="fa fa-caret-up"></i></button>&nbsp;
+                         <a href="{{$article->url}}" class="urlTitle">{{$article->title}}</a>
+                         <a href="article/edit/{{$article->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
+                      </div>
                     </div>
-                    <div class="form-inline upvote">
-                      <button name="article_id" value="1">
-                        <i class="fa fa-btn fa-caret-down disabled downvote" </i>
-                      </button>
+                    <div class="info">
+                      <div class="form-inline downvote"><button class="up-down">
+                         <i class="fa fa-caret-down"></i></button>&nbsp;
+                          3 points  | posted by {{$article->posted_by}} |
+                         <a href="comments/{{$article->id}}">2 comments</a>
+                      </div>
                     </div>
-                  </div> -->
-                    <tr>
-                      <th>
-                        <div class="url">
-                          <a href="{{$article->url}}" class="urlTitle">{{$article->title}}</a>
-                          <a href="article/edit/{{$article->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
-                        </div>
-                        <div class="info">
-                          <!--  Placeholder for later data -->
-                          3 points  | posted by {{$article->posted_by}} | <a href="comments/{{$article->id}}">2 comments</a>
-                        </div>
-                      </th>
-                    </tr>
+                   </th>
+                  </tr>
+                 </div>
                 </li>
               </ul>
               @endforeach
             @endif
           </div>
         </div>
-        <!-- {{ $article }} -->
       </div>
     </div>
   </div>
-
 @endsection

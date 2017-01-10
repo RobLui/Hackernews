@@ -19,7 +19,7 @@
                 <button name="cancel" class="btn" value="7">
                     <i class="fa fa-btn fa-trash" title="cancel"></i> cancel
                 </button>
-              </form> 
+              </form>
             </div>
           <br>
           <!-- @if(isset($_SESSION["test"])) -->

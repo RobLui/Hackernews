@@ -74,20 +74,22 @@ class ArticleController extends Controller
               ]);
               // Validation error, show errors
               if ($validator->fails()) {
-                return view('/articles/add')
+                return view('/articles/edit')
+                -> withArticles($articles)
                 -> withErrors($validator);
               }
               // Check for valid email through regEX
               if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$req->url)) {
-                return view('/articles/add')
+                return view('/articles/edit')
+                -> withArticles($articles)
                 -> withErrors($req->url . " is not a valid URL");
-              }
-        $articles->update($req->all());
+              } //id no errors occur, the article can update
+              $articles->update($req->all());
+            }
+        return redirect("/home");
+        }
       }
-      return redirect("/home");
     }
-  }
-}
     // ELOQUENT DELETE
     public function delete(Request $req, $id)
     {
