@@ -28,19 +28,28 @@ class CommentsController extends Controller
         ->withArticles($article);
     }
 
-    public function Add(Request $request,$id)
+    public function Add(Request $req,$id)
     {
       // IK MOET EEN POST_ID ophalen later :) - REMINDER -
       $comment = new Comment;
       $article = Article::all();
       $user = User::all();
       // $request title & url gaat de 2 uit de form opvragen
-      $comment->comment = $request->comment;
-      $comment->name = $user[0]->name;
-      $comment->post_id = $id;
-      $comment->save();
+      if(count($req->comment) > 0 && $req->comment != NULL)
+      {
+        $comment->comment = $req->comment;
+        $comment->name = $user[0]->name;
+        $comment->post_id = $article[$id]->id;
+        $comment->save();
+        return redirect()->back();
+      }
+      else
+      {
+        $error = array();
+        $error = ["Whoops! Something went wrong!","The body field is required"];
+        return redirect()->back()->withErrors($error);
+      }
       // redirect to previous page (the page where to post was done :) -> working
-      return redirect()->back();
     }
 
     // Show edit comment

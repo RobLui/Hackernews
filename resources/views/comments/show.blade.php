@@ -8,7 +8,7 @@
           <a href="/../home">← back to overview</a>
           <br><br>
           <!--  display errors -->
-          @include("common.errors")
+        @include("common.errors")
         <div class="panel panel-default">
           <div class="panel-heading">
             Article: {{$articles[$comments->post_id]->title}}

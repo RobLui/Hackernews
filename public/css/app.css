@@ -1570,7 +1570,7 @@
         a.bg-warning:focus, a.bg-warning:hover {
             background-color: #f7ecb5
         }
-        
+
         .bg-danger {
             background-color: #f2dede;
             border-radius: 5px;
@@ -4950,7 +4950,7 @@
             color: #a94442
         }
 
-        .alert-danger hr {
+        .alert-danger .alert-danger hr {
             border-top-color: #e4b9c0
         }
 
@@ -6480,7 +6480,7 @@
         .visible-print-inline-block {
             display: none!important
         }
-
+        
         @media print {
             .visible-print-inline-block {
                 display: inline-block!important
@@ -6500,4 +6500,15 @@
 
         ul.article-overview {
             list-style-type: none;
+        }
+
+        .alert.alert-danger ul li:first-child {
+            list-style-type: none;
+            font-weight: bold;
+        }
+
+        .alert.alert-danger ul li:nth-child(2) {
+            padding-top: 2%;
+            margin-left: 5%;
+            color: #a94442;
         }
