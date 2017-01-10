@@ -20,8 +20,8 @@ class CommentsController extends Controller
 
       $comment = Comment::all();
       $comment->name = $request->name;
-      $comment->post_id = $id;
-      $comment->comment = $request->comment;
+      $comment->post_id = $article->id;
+      $comment->comment = $comment->post_id ;
 
       return view('comments/show')
         ->withComments($comment)
@@ -32,16 +32,15 @@ class CommentsController extends Controller
     {
       // IK MOET EEN POST_ID ophalen later :) - REMINDER -
       $comment = new Comment;
-      $article = new Article;
+      $article = Article::all();
       $user = User::all();
       // $request title & url gaat de 2 uit de form opvragen
       $comment->comment = $request->comment;
       $comment->name = $user[0]->name;
       $comment->post_id = $id;
       $comment->save();
-      return view('comments/show')
-        ->withComments($comment)
-        ->withArticles($article);
+      // redirect to previous page (the page where to post was done :) -> working
+      return redirect()->back();
     }
 
     // Show edit comment

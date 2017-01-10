@@ -9,11 +9,20 @@
           <br><br>
           <!--  display errors -->
           @include("common.errors")
-
         <div class="panel panel-default">
           <div class="panel-heading">
-          Article: {{$articles[$articles->id]->title}}
-          <?php echo $articles->id  ?>
+            Article: {{$articles[$comments->post_id]->title}}
+          <?= "<br>Articles = " . $articles->count();   ?> <!-- test article amnt -->
+          <?= "<br>Comments = " . $comments->count();   ?><!-- test comment amnt -->
+          <!--  Haal alle verschillende artikels op -->
+
+          @foreach($articles as $article)
+              @foreach($comments as $c)
+                @if($c->post_id == $article->id)
+                  <li> {{$c->comment}}</li>
+                @endif
+               @endforeach
+          @endforeach
             <a href="/article/edit/{{$articles->id}}" class="btn btn-danger btn-xs pull-right">
               <i class="fa fa-btn fa-trash" title="delete"></i> delete article
             </a>
@@ -63,7 +72,7 @@
               </div>
             @endif
               <!-- ADD comment -->
-            <form action="../add/<?= basename($_SERVER["PHP_SELF"]); ?>" method="POST" class="form-horizontal">
+            <form action="/comments/add/<?= basename($_SERVER["PHP_SELF"]); ?>" method="POST" class="form-horizontal">
               {{ csrf_field() }}
               <input type="hidden" name="_token" value="{{ csrf_token() }}"> <!-- mismatch token error fix -->
               <!-- Comment data -->
