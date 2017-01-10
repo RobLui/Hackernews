@@ -27,7 +27,8 @@ class HomeController extends Controller
       // }
       // echo $user_name[10];
       // test order by, since we have no points implemented yet
-      $articles = Article::orderBy('created_at','asc')->get();
+      // $articles = Article::orderBy('created_at','asc')->get();
+      $articles = Article::all();
       // return values from the model to the view
       return view('/home')
       ->withArticles($articles)

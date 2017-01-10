@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use resources\views\articles;
 use App\Article;
+use App\User;
 use Auth;
 // use PDO;
 
@@ -43,10 +44,12 @@ class ArticleController extends Controller
           }
           // No validation error, continue..
           $articles = new Article;
+          $user = User::all();
           // $request title & url = get data from both out of the submitted form
           $articles->title = $request->title;
           $articles->url = $request->url;
-          $articles->posted_by = "test";
+          // Temporary check who posted
+          $articles->posted_by = $user[0]->name;
           // Save into db
           $articles->save();
           }
