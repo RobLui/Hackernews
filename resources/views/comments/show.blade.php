@@ -18,30 +18,47 @@
             </a>
           </div>
           <div class="panel-body">
-             <div class="vote">
-                <div class="form-inline upvote">
-                  <i class="fa fa-btn fa-caret-up disabled upvote" title="can't upvote your own articles"></i>
+            <ul class="article-overview">
+             <li>
+              <div class="vote">
+               <tr>
+                <th>
+                  <div class="url">
+                    <div class="form-inline upvote"><button class="up-down">
+                       <i class="fa fa-caret-up"></i></button>&nbsp;
+                       <a href="{{$articles->url}}" class="urlTitle">{{$articles->title}}</a>
+                       <a href="/article/edit/{{$articles->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
+                    </div>
+                  </div>
+                  <div class="info">
+                    <div class="form-inline downvote"><button class="up-down">
+                       <i class="fa fa-caret-down"></i></button>&nbsp;
+                        3 points  | posted by {{$articles->posted_by}} |
+                       <a href="comments/{{$articles->id}}">2 comments</a>
+                    </div>
+                  </div>
+                 </th>
+                </tr>
+               </div>
+              </li>
+            </ul>
+             <!--  If comments on the post are available -->
+              @if(count($comments->name) > 0)
+                <!--  URL -->
+                <div class="url">
+                    <a href="comments/add/{id}" class="btn btn-primary btn-xs edit-btn">edit</a>
                 </div>
-                <div class="form-inline downvote">
-                  <i class="fa fa-btn fa-caret-down disabled" title="can't downvote your own articles"></i>
+                <!--  Info -->
+                <div class="info">
+                  0 points  | posted by {{$comments[3]->name}} :D | 0 comments
                 </div>
-             </div>
-
-            <!--  URL -->
-            <div class="url">
-              <!--  ID nog aanpassen naar welke aan te passen -->
-              <!-- NOG AAN TE PASSEN -->
-                <a href="comments/add/{id}" class="btn btn-primary btn-xs edit-btn">edit</a>
-            </div>
-            <!--  Info -->
-            <div class="info">
-              0 points  | posted by {{$comments[3]->name}} :D | 0 comments
-            </div>
-            <!--  Comments -->
-            <div class="comments">
-              <div>
-                <p>No comments yet</p>
-              </div>
+              <!--  If there are no comments -->
+              @else
+                <div class="comments">
+                <div>
+                  <p>No comments yet</p>
+                </div>
+              @endif
             </div>
               <!-- ADD comment -->
               <form action="../add/<?= basename($_SERVER["PHP_SELF"]); ?>" method="POST" class="form-horizontal">

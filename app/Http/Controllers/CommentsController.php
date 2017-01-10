@@ -14,6 +14,9 @@ class CommentsController extends Controller
     {
       $article = Article::orderBy('created_at','asc')->get();
       $article->id = $id;
+      $article->url = $request->url;
+      $article->title = $request->title;
+      $article->posted_by = $request->posted_by;
       $comment = Comment::all();
       $comment->name = $request->name;
       $comment->post_id = $id;
