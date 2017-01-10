@@ -24,9 +24,9 @@
                    </div>
                    <div class="info">
                     <div class="form-inline downvote"><button class="up-down">
-                       <i class="fa fa-caret-down"></i></button>&nbsp;
+                      <i class="fa fa-caret-down"></i></button>&nbsp;
                         3 points  | posted by {{$article->posted_by}} |
-                       <a href="comments/{{$article->id}}">2 comments</a>
+                      <a href="comments/{{$article->id}}">2 comments</a>
                     </div>
                    </div>
                   </th>

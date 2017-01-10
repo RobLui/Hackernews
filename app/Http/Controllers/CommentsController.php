@@ -12,14 +12,17 @@ class CommentsController extends Controller
 
     public function index(Request $request,$id)
     {
-      $article = Article::orderBy('created_at','asc')->get();
+      $article = Article::all();
       $article->id = $id;
       $article->url = $request->url;
       $article->title = $request->title;
       $article->posted_by = $request->posted_by;
+
       $comment = Comment::all();
       $comment->name = $request->name;
       $comment->post_id = $id;
+      $comment->comment = $request->comment;
+
       return view('comments/show')
         ->withComments($comment)
         ->withArticles($article);
