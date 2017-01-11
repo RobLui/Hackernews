@@ -12,8 +12,16 @@
         <div class="panel panel-default">
           <div class="panel-heading clearfix">
             Article: @foreach($articles as $a) @if($a->id == $comments->post_id) {{$a->title}} @endif @endforeach
-            <a href="/article/edit/{{$articles->id}}" class="btn btn-danger btn-xs pull-right">
-              <i class="fa fa-btn fa-trash" title="delete"></i> delete article
+            @foreach($articles as $article)
+              @if($article->id == $comments->post_id)
+                @if(isset(Auth::user()->name))
+                  @if(Auth::user()->name == $article->posted_by)
+                  <a href="/article/edit/{{$articles->id}}" class="btn btn-danger btn-xs pull-right">
+                    <i class="fa fa-btn fa-trash" title="delete"></i> delete article
+                  @endif
+                @endif
+              @endif
+            @endforeach
             </a>
           </div>
           <div class="panel-content">
@@ -32,13 +40,9 @@
                    </div>
                  </div>
                  <div class="url">&nbsp;
-                    <a href="{{$articles->url}}" class="urlTitle">
-                      @foreach($articles as $article)
-                        @if($article->id == $comments->post_id)
-                          {{$article->title}}
-                        @endif
-                      @endforeach
-                    </a>
+                  @foreach($articles as $article) @if($article->id == $comments->post_id)
+                    <a href="{{$article->url}}" class="urlTitle">{{$article->title}}</a>
+                  @endif @endforeach
                     @foreach($articles as $article)
                       @if($article->id == $comments->post_id)
                         @if(isset(Auth::user()->name))

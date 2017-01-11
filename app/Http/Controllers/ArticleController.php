@@ -70,9 +70,10 @@ class ArticleController extends Controller
     // ELOQUENT EDIT
     public function edit($id)
     {
+      $user = User::all();
       if(Auth::check()) {
-      $articles = Article::findOrFail($id);
-      return view('articles/edit',compact('articles'));
+        $articles = Article::findOrFail($id);
+        return view('articles/edit',compact('articles'));
       }
       else {
         return redirect("/home");
