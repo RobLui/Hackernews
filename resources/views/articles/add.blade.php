@@ -19,7 +19,7 @@
 
                 <!-- article title -->
                 <div class="form-group">
-                  <label for="titel" class="col-sm-3 control-label">Title (max 255 chars)</label>
+                  <label for="titel" class="col-sm-3 control-label">Title (max 255 characters)</label>
                   <div class="col-sm-6">
                       <input type="text" name="title" id="title" class="form-control">
                   </div>

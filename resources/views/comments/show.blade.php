@@ -12,10 +12,6 @@
         <div class="panel panel-default">
           <div class="panel-heading clearfix">
             Article: @foreach($articles as $a) @if($a->id == $comments->post_id) {{$a->title}} @endif @endforeach
-            <!-- @if(isset(Auth::user()->name)) -->
-              <!-- @if(Auth::user()->name == $articles->posted_by)) -->
-              <!-- @endif -->
-            <!-- @endif -->
             <a href="/article/edit/{{$articles->id}}" class="btn btn-danger btn-xs pull-right">
               <i class="fa fa-btn fa-trash" title="delete"></i> delete article
             </a>
@@ -55,17 +51,24 @@
                  </div>
                  <div class="info">
                     &nbsp;&nbsp;
-                    {{$articles->votes}} point
-                    @if($articles->votes > 1)
-                      s
-                    @endif
-                      | posted by
+                    {{$articles->votes}} point @if($articles->votes > 1)s @endif
+                    | posted by
                     @foreach($articles as $article)
                       @if($article->id == $comments->post_id)
-                        {{$article->posted_by}}
+                        {{{$article->posted_by}}}
                       @endif
                     @endforeach
-                     | {{$comments->count()}} comments
+                    <?php $i = 0; ?>
+                    @foreach($comments as $comment)
+                      @if($comment->post_id == $articles->id)
+                        <?php $i++; ?>
+                      @endif
+                    @endforeach | {{$i}}
+                    @if( $i == 0 || $i > 1 )
+                     comments
+                    @else
+                     comment
+                    @endif
                  </div>
                  </th>
                 </tr>
@@ -130,13 +133,4 @@
     </div>
   </div>
 </div>
-
 @endsection
-
-
-<!--
-{{$articles->votes}} points | posted by
-@foreach($comments as $comment)
-{{$comment->name}}
-  @endforeach
-{{$comments->count()}} | comments -->
