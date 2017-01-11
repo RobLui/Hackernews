@@ -9,28 +9,27 @@ use App\User;
 
 class CommentsController extends Controller
 {
-
-    public function index(Request $request,$id)
+    public function index(Request $req,$id)
     {
       $article = Article::all();
       $article->id = $id;
-      $article->url = $request->url;
-      $article->title = $request->title;
-      $article->posted_by = $request->posted_by;
+      $article->url = $req->url;
+      $article->title = $req->title;
+      $article->posted_by = $req->posted_by;
 
       $comment = Comment::all();
-      $comment->name = $request->name;
-      $comment->post_id = $article->id;
-      $comment->comment = $comment->post_id ;
+      $comment->id = $id;
+      $comment->name = $req->name;
+      $comment->post_id = $req->id; // deze werkt
+      $comment->comment = $comment[$id]->comment ;
 
-      return view('comments/show')
-        ->withComments($comment)
-        ->withArticles($article);
+      return view("comments/show")
+        ->withArticles($article)
+        ->withComments($comment);
     }
 
     public function Add(Request $req,$id)
     {
-      // IK MOET EEN POST_ID ophalen later :) - REMINDER -
       $comment = new Comment;
       $article = Article::all();
       $user = User::all();

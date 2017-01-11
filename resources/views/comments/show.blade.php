@@ -11,18 +11,7 @@
         @include("common.errors")
         <div class="panel panel-default">
           <div class="panel-heading">
-            Article: {{$articles[$comments->post_id]->title}}
-          <?= "<br>Articles = " . $articles->count();   ?> <!-- test article amnt -->
-          <?= "<br>Comments = " . $comments->count();   ?><!-- test comment amnt -->
-          <!--  Haal alle verschillende artikels op -->
-
-          @foreach($articles as $article)
-              @foreach($comments as $c)
-                @if($c->post_id == $article->id)
-                  <li> {{$c->comment}}</li>
-                @endif
-               @endforeach
-          @endforeach
+            Article: @foreach($articles as $a) @if($a->id == $comments->post_id) {{$a->title}} @endif @endforeach
             <a href="/article/edit/{{$articles->id}}" class="btn btn-danger btn-xs pull-right">
               <i class="fa fa-btn fa-trash" title="delete"></i> delete article
             </a>
@@ -53,7 +42,7 @@
               </li>
             </ul>
             <!--  If comments on the post are available -->
-            @if(count($comments->comment) > 0)
+            @if(count($comments) > 0)
               <div class="comments">
                 <ul>
                   <li>

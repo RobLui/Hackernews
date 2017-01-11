@@ -18,18 +18,9 @@ class HomeController extends Controller
     public function index(request $req)
     {
       $user = User::all();
-      $user->name = $req->name;
-      // $user_name = array();
-      // foreach ($user as $userZZ) {
-      //   for ( $i=0; $i < strlen($userZZ); $i++) {
-      //     $user_name[$i] = $userZZ->name . "<br>";
-      //   }
-      // }
-      // echo $user_name[10];
-      // test order by, since we have no points implemented yet
-      // $articles = Article::orderBy('created_at','asc')->get();
       $articles = Article::all();
-      // return values from the model to the view
+      $user->name = $req->name;
+
       return view('/home')
       ->withArticles($articles)
       ->withUsers($user);
