@@ -29,11 +29,14 @@
                    <div class="url">&nbsp;
                      <a href="{{$article->url}}" class="urlTitle">{{$article->title}}</a>
                       @if(isset(Auth::user()->name))
-                        <a href="article/edit/{{$article->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
+                        @if(Auth::user()->name == $article->posted_by)
+                          <a href="article/edit/{{$article->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
+                        @endif
                       @endif
                    </div>
                    <div class="info"> &nbsp;&nbsp;&nbsp;&nbsp;{{$article->votes}} point
-                     @if($article->votes > 1) s @endif | posted by
+                     @if($article->votes > 1) s @endif
+                      | posted by
                      @if(isset($article->posted_by))
                       {{{$article->posted_by}}}
                      @else not set @endif

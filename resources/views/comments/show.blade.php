@@ -41,8 +41,17 @@
                         @if($article->id == $comments->post_id)
                           {{$article->title}}
                         @endif
-                      @endforeach</a>
-                    <a href="/article/edit/{{$articles->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
+                      @endforeach
+                    </a>
+                    @foreach($articles as $article)
+                      @if($article->id == $comments->post_id)
+                        @if(isset(Auth::user()->name))
+                          @if(Auth::user()->name == $article->posted_by)
+                          <a href="/article/edit/{{$articles->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
+                          @endif
+                        @endif
+                      @endif
+                    @endforeach
                  </div>
                  <div class="info">
                     &nbsp;&nbsp;
