@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use resources\views\articles;
 use App\Article;
 use App\User;
+use App\Comment;
 use Auth;
 // use PDO;
 
@@ -17,14 +18,17 @@ class ArticleController extends Controller
 
     }
 
-
     public function index(request $req)
     {
       $user = User::all();
-      $articles = Article::all();
+      $article = Article::all();
+      $comment = Comment::all();
+
+      $article->votes = 1;
       $user->name = $req->name;
       return view('index')
-      ->withArticles($articles)
+      ->withArticles($article)
+      ->withComments($comment)
       ->withUsers($user);
     }
     // CREATE
@@ -52,12 +56,16 @@ class ArticleController extends Controller
           // $request title & url = get data from both out of the submitted form
           $articles->title = $request->title;
           $articles->url = $request->url;
-          // Temporary check who posted
-          $articles->posted_by = $user[0]->name;
+          $articles->votes = "1";
+          $articles->posted_by = Auth::user()->name;
           // Save into db
           $articles->save();
-          }
           return redirect("/");
+          }
+          else
+          {
+            return redirect("login");
+          }
     }
     // ELOQUENT EDIT
     public function edit($id)
@@ -137,7 +145,7 @@ class ArticleController extends Controller
     //     // Save into db
     //     $article->save();
     //     }
-    //     return redirect("/home");
+        // return redirect("/home");
     // }
 
   // EDIT article

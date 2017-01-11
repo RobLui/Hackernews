@@ -6502,13 +6502,13 @@
             overflow: hidden;
         }
 
+        .article-overview li {
+            padding: 8px 0;
+        }
+
         .article-overview {
             list-style-type: none;
             padding: 0px;
-        }
-
-        .article-overview li {
-            padding: 8px 0;
         }
 
         .alert.alert-danger ul li:first-child {
@@ -6524,6 +6524,8 @@
 
         .comment-info {
             border-top: 1px solid #eee;
+            margin-top: 6px;
+            padding-top: 6px;
             font-size: 10px;
         }
 
@@ -6633,4 +6635,22 @@
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
+        }
+
+        .disabled {
+            color: lightgrey;
+        }
+
+        .comments {
+            padding: 32px 0;
+        }
+
+        .panel-default>.panel-heading {
+            color: #333;
+            background-color: #f5f5f5;
+            border-color: #ddd;
+        }
+
+        .comments li {
+            margin: 16px 0 32px 0;
         }
