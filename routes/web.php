@@ -19,7 +19,7 @@ Auth::routes();
   // Article controller showing articles @ index
   Route::get('/', 'ArticleController@index');
   // Home controller showing articles @ home
-  Route::get('/home', 'HomeController@index');
+  Route::get('/home', 'ArticleController@index');
 
 // ARTICLES -------- ELOQUENT METHODS ----- PASCAL's REQUEST :-)
   // SHOW EDIT view

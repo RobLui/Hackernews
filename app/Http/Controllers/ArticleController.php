@@ -17,11 +17,16 @@ class ArticleController extends Controller
 
     }
 
-    //  SHHOW ARTICLES @ INDEX
-    public function index()
+
+    public function index(request $req)
     {
-      $article = Article::orderBy('created_at','asc')->get();
-      return view('index')->withArticles($article);
+      $user = User::all();
+      $articles = Article::all();
+      $user->name = $req->name;
+
+      return view('/home')
+      ->withArticles($articles)
+      ->withUsers($user);
     }
     // CREATE
     public function create(Request $request)

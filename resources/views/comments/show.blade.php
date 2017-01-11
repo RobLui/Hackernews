@@ -19,26 +19,26 @@
           <div class="panel-body">
             <ul class="article-overview">
              <li>
-              <div class="vote">
                <tr>
                 <th>
-                  <div class="url">
-                    <div class="form-inline upvote"><button class="up-down">
-                       <i class="fa fa-caret-up"></i></button>&nbsp;
-                       <a href="{{$articles->url}}" class="urlTitle">{{$articles->title}}</a>
-                       <a href="/article/edit/{{$articles->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
-                    </div>
+               <div class="vote">
+                 <div class="form-inline upvote"><button class="up-down">
+                     <i class="fa fa-caret-up"></i></button>&nbsp;
+                 </div>
+                 <div class="form-inline downvote"><button class="up-down">
+                    <i class="fa fa-caret-down"></i></button>&nbsp;
+                 </div>
+               </div>
+               <div class="url">
+                    <a href="/article/edit/{{$articles->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
+                    <a href="{{$articles->url}}" class="urlTitle">{{$articles->title}}</a>
                   </div>
                   <div class="info">
-                    <div class="form-inline downvote"><button class="up-down">
-                       <i class="fa fa-caret-down"></i></button>&nbsp;
-                        3 points  | posted by {{$articles->posted_by}} |
-                       <a href="comments/{{$articles->id}}">2 comments</a>
-                    </div>
+                    3 points  | posted by {{$articles->posted_by}} |
+                   <a href="comments/{{$articles->id}}">2 comments</a>
                   </div>
                  </th>
                 </tr>
-               </div>
               </li>
             </ul>
             <!--  If comments on the post are available -->
@@ -47,11 +47,22 @@
                 <ul>
                   <li>
                     <div class="comment-body">
-                      {{$comments->comment}}
+                      @if(count($articles) > 0 && count($comments) > 0)
+                        <!--    <?= "<br>All different Articles = " . $articles->count();   ?>  test article amnt -->
+                        <!--    <?= "<br>All different Comments = " . $comments->count();   ?>  test comment amnt -->
+                        @foreach($comments as $c)
+                          @if($c->post_id == $articles->id)
+                            <li>
+                              <div class="comment-info">
+                              comment post_id = {{$c->post_id}}&nbsp;& article id = {{$articles->id}}&nbsp;& comment inhoud = {{$c->comment}}
+                            </li>
+                          @endif
+                        @endforeach
+                      @endif
+                      </div>
                     </div>
                   </li>
                 </ul>
-              </div>
             <!--  If there are no comments -->
             @else
               <div class="comments">
@@ -85,4 +96,5 @@
       </div>
     </div>
   </div>
+</div>
 @endsection

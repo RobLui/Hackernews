@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Hackernews') }}</title>
+    <title>{{ config('app.name', 'Hackernews.local') }}</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">

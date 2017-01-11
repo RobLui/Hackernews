@@ -7,7 +7,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
               <div class="panel-heading">Instructies</div>
-                <div class="panel-body">
+              <div class="panel-content">
                 <h1>Algemeen</h1>
                 <ul>
                     <li>Maak deze opdracht zo goed mogelijk na, het idee is gebaseerd op <a href="http://news.ycombinator.com">Hackernews</a> of <a href="http://www.reddit.com">reddit</a>.</li>
@@ -30,10 +30,10 @@
                     <li>Er worden GEEN hard deletes uitgevoerd.</li>
                     <li>Als je opdracht is afgewerkt doe je een export van je database (inclusief databasenaam en structuur) en plaats je deze in de root van je project.</li>
                 </ul>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 @endsection

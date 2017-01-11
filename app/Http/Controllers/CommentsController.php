@@ -38,7 +38,7 @@ class CommentsController extends Controller
       {
         $comment->comment = $req->comment;
         $comment->name = $user[0]->name;
-        $comment->post_id = $article[$id]->id;
+        $comment->post_id =$id;
         $comment->save();
         return redirect()->back();
       }
