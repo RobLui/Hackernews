@@ -27,8 +27,7 @@
                      <a href="article/edit/{{$article->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
                    </div>
                    <div class="info">
-                      3 points  | posted by {{$article->posted_by}} |
-                      <a href="comments/{{$article->id}}">2 comments</a>
+                      <a href="comments/{{$article->id}}">2 comments test</a>
                    </div>
                   </th>
                  </tr>

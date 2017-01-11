@@ -23,8 +23,7 @@ class ArticleController extends Controller
       $user = User::all();
       $articles = Article::all();
       $user->name = $req->name;
-
-      return view('/home')
+      return view('index')
       ->withArticles($articles)
       ->withUsers($user);
     }
@@ -58,7 +57,7 @@ class ArticleController extends Controller
           // Save into db
           $articles->save();
           }
-          return redirect("/home");
+          return redirect("/");
     }
     // ELOQUENT EDIT
     public function edit($id)
@@ -94,7 +93,7 @@ class ArticleController extends Controller
               } //id no errors occur, the article can update
               $articles->update($req->all());
             }
-        return redirect("/home");
+        return redirect("/");
         }
       }
     }
@@ -106,7 +105,7 @@ class ArticleController extends Controller
       if (Auth::check()) {
           $articles->delete($req->all());
         }
-      return redirect("/home");
+      return redirect("/");
     }
 
   // EDIT VIEW
