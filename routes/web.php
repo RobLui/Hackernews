@@ -29,13 +29,13 @@ Auth::routes();
   // UPDATE article
   Route::post('article/edit/{id}', 'ArticleController@update');
   // DELETE articles
-  Route::post('article/delete/{id}', 'ArticleController@delete');
+  Route::post('/article/delete/{id}', 'ArticleController@delete');
 
 // COMMENTS
   // SHOW COMMENT view
   Route::get('/comments/{id}', 'CommentsController@index');
   // ADD comments
-  Route::post('/comments/add/{id}', 'CommentsController@Add');
+  Route::post('/comments/add/{id}', 'CommentsController@create');
 
   // ARTICLES - OLD WORKING FUNCTIONS USING PDO
     // SHOW EDIT view

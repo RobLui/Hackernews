@@ -39,8 +39,8 @@
                       | posted by
                      @if(isset($article->posted_by))
                       {{{$article->posted_by}}}
+                      | <a href="comments/{{$article->id}}">{{$comments->count($comments)}} comments</a>
                      @else not set @endif
-                     | <a href="comments/{{$article->id}}">{{$comments->count()}} comments</a>
                    </div>
                   </th>
                  </tr>

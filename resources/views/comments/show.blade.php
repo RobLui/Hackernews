@@ -112,7 +112,7 @@
             @endif            <div class="panel-content">
 
               <!-- ADD comment -->
-            <form action="/comments/add/<?= basename($_SERVER["PHP_SELF"]); ?>" method="POST" class="form-horizontal">
+            <form action="/comments/add/{{$articles->id}}" method="POST" class="form-horizontal">
               {{ csrf_field() }}
               <input type="hidden" name="_token" value="{{ csrf_token() }}"> <!-- mismatch token error fix -->
               <!-- Comment data -->

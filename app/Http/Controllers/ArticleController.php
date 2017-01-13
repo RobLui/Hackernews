@@ -9,7 +9,8 @@ use App\Article;
 use App\User;
 use App\Comment;
 use Auth;
-// use PDO;
+use DB;
+use PDO;
 
 class ArticleController extends Controller
 {
@@ -28,8 +29,7 @@ class ArticleController extends Controller
       $user->name = $req->name;
       return view('index')
       ->withArticles($article)
-      ->withComments($comment)
-      ->withUsers($user);
+      ->withComments($comment);
     }
     // CREATE
     public function create(Request $request)
@@ -107,7 +107,7 @@ class ArticleController extends Controller
               } //id no errors occur, the article can update
               $articles->update($req->all());
             }
-        return redirect("/");
+        return redirect("/")->with(compact('id'));
         }
       }
     }
@@ -119,7 +119,7 @@ class ArticleController extends Controller
       if (Auth::check()) {
           $articles->delete($req->all());
         }
-      return redirect("/");
+      return redirect("/")->with(compact('id'));
     }
 
   // EDIT VIEW

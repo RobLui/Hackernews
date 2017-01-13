@@ -10,7 +10,7 @@
             <br>
               Are you sure you want to delete this article?
               <!--  Working delete =D -->
-              <form action="../delete/<?= basename($_SERVER["PHP_SELF"]); ?>" method="POST" class="pull-right">
+              <form action="../delete/{{$articles->id}}" method="POST" class="pull-right">
                 {{ csrf_field() }}
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <button name="delete" class="btn btn-danger" value="7">
@@ -29,7 +29,7 @@
               <div class="panel panel-default">
                 <div class="panel-heading">Edit article
                   <!--  Delete article button -->
-                  <a href="<?= basename($_SERVER["PHP_SELF"]); ?>" class="btn btn-danger btn-xs pull-right">
+                  <a href="../delete/" class="btn btn-danger btn-xs pull-right">
                     <i class="fa fa-btn fa-trash"></i> delete article</a>
                 </div>
                 <br>
@@ -40,7 +40,7 @@
 
                 <!-- Edit -->
 
-                <form action="../edit/<?= basename($_SERVER["PHP_SELF"]); ?>" method="POST" class="form-horizontal">
+                <form action="../edit/{{$articles->id}}" method="POST" class="form-horizontal">
                     {{ csrf_field() }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"> <!-- mismatch token error fix -->
                     <!-- article title -->

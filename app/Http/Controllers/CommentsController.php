@@ -32,7 +32,7 @@ class CommentsController extends Controller
         ->withComments($comment);
     }
 
-    public function Add(Request $req,$id)
+    public function create(Request $req,$id)
     {
       $comment = new Comment;
       $article = Article::all();
@@ -55,7 +55,7 @@ class CommentsController extends Controller
         }
       }
       else{
-        return redirect("login");
+        return redirect("login")->with(compact('id'));
       }
     }
 
@@ -70,4 +70,5 @@ class CommentsController extends Controller
     {
         //
     }
+
 }
