@@ -1,4 +1,4 @@
-website : robbertluit.be
+[Hackernews Robbert](http://www.robbertluit.be)
 
 ## License
 
