@@ -54,9 +54,9 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'localhost'),
+            'host' => env('DB_HOST', 'robbertluit.mysql.eu2.frbit.com'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'opdracht'),
+            'database' => env('DB_DATABASE', 'robbertluit'),
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
