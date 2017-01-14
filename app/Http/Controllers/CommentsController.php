@@ -7,6 +7,7 @@ use App\Comment;
 use App\Article;
 use App\User;
 use Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CommentsController extends Controller
 {
@@ -39,6 +40,11 @@ class CommentsController extends Controller
       $user = User::all();
       if (Auth::check()) {
         // $request title & url gaat de 2 uit de form opvragen
+        $validator = Validator::make($req->all(),['comment' => 'required|max:255']);
+        if ($validator->fails()) {
+          return redirect()->back()
+          -> withErrors($validator);
+        }
         if(count($req->comment) > 0 && $req->comment != NULL)
         {
           $comment->comment = $req->comment;
