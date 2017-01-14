@@ -71,10 +71,15 @@ class CommentsController extends Controller
         //
     }
 
-    //  Show destroy comment
-    public function delete($id)
+    // ELOQUENT DELETE
+    public function delete(Request $req, $id)
     {
-        //
+      $comment = Comment::findOrFail($id);
+      // Check if the user is logged in -> only than, an article can be deleted
+      if (Auth::check()) {
+          $comment->delete($id);
+        }
+      return redirect()->back();
     }
 
 }

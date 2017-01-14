@@ -115,10 +115,12 @@ class ArticleController extends Controller
     public function delete(Request $req, $id)
     {
       $articles = Article::findOrFail($id);
+      $comments = Comments::where('comment', $req->comment)->get();
+      var_dump($comments);
       // Check if the user is logged in -> only than, an article can be deleted
-      if (Auth::check()) {
-          $articles->delete($req->all());
-        }
+      // if (Auth::check()) {
+      //     $articles->delete($req->all());
+      //   }
       return redirect("/")->with(compact('id'));
     }
 

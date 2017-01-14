@@ -95,6 +95,13 @@
                                 @endif
                                 on
                                 {{$c->created_at}}
+                                @if($article->id == $comments->post_id)
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <a href="/comments/edit/{{$c->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
+                                    <a href="/comments/delete/{{$c->id}}" class="btn btn-danger btn-xs edit-btn">
+                                      <i class="fa fa-btn fa-trash" title="delete"></i> delete
+                                    </a>
+                                @endif
                               </div>
                             </li>
                           @endif

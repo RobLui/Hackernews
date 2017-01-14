@@ -36,6 +36,11 @@ Auth::routes();
   Route::get('/comments/{id}', 'CommentsController@index');
   // ADD comments
   Route::post('/comments/add/{id}', 'CommentsController@create');
+  // EDIT comments
+  Route::post('/comments/edit/{id}','CommentsController@edit');
+  // DELETE comments
+  Route::post('/comments/delete/{id}','CommentsController@delete');
+  Route::get('/comments/delete/{id}','CommentsController@delete');
 
   // ARTICLES - OLD WORKING FUNCTIONS USING PDO
     // SHOW EDIT view
