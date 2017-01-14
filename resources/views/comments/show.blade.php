@@ -95,7 +95,7 @@
                                 @endif
                                 on
                                 {{$c->created_at}}
-                                @if($article->id == $comments->post_id)
+                                    @if(Auth::user()->name == $c->name)
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <a href="/comments/edit/{{$c->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
                                     <a href="/comments/delete/{{$c->id}}" class="btn btn-danger btn-xs edit-btn">
