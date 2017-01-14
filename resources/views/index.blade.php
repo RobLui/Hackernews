@@ -35,11 +35,17 @@
                       @endif
                    </div>
                    <div class="info"> &nbsp;&nbsp;&nbsp;&nbsp;{{$article->votes}} point
-                     @if($article->votes > 1) s @endif
-                      | posted by
+                     @if($article->votes > 1)s @endif
+                     | posted by
                      @if(isset($article->posted_by))
                       {{{$article->posted_by}}}
-                      | <a href="comments/{{$article->id}}">{{$comments->count($comments)}} comments</a>
+                      <?php $i=0; ?>
+                      @foreach($comments as $comment)
+                        @if($comment->post_id == $article->id)
+                          <?php $i++; ?>
+                        @endif
+                      @endforeach
+                      | <a href="comments/{{$article->id}}">{{$i}} comments</a>
                      @else not set @endif
                    </div>
                   </th>

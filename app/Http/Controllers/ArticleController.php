@@ -9,8 +9,8 @@ use App\Article;
 use App\User;
 use App\Comment;
 use Auth;
-use DB;
 use PDO;
+use DB;
 
 class ArticleController extends Controller
 {

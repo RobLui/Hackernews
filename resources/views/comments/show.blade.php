@@ -109,7 +109,8 @@
                   <p>No comments yet</p>
                 </div>
               </div>
-            @endif            <div class="panel-content">
+            @endif
+            <div class="panel-content">
 
               <!-- ADD comment -->
             <form action="/comments/add/{{$articles->id}}" method="POST" class="form-horizontal">
