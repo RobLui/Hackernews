@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CommentsController extends Controller
 {
+    // SHOW comment index
     public function index(Request $req,$id)
     {
       $user = User::all();
@@ -32,7 +33,7 @@ class CommentsController extends Controller
         ->withArticles($article)
         ->withComments($comment);
     }
-
+    // CREAET comment
     public function create(Request $req,$id)
     {
       $comment = new Comment;
@@ -68,7 +69,14 @@ class CommentsController extends Controller
     // Show edit comment
     public function edit($id)
     {
-        //
+      $comment = Comment::findOrFail($id);
+      return view("comments/edit",compact("comment"));
+    }
+    // ELOQUENT UPDATE
+    public function update($id){
+      $comment = Comment::findOrFail($id);
+      $comment->update($req->all());
+      return redirect()->back();
     }
 
     // ELOQUENT DELETE
