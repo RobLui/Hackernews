@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Comment;
 use App\Article;
 use App\User;
 use Auth;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\URL;
 
 class CommentsController extends Controller
 {
@@ -39,6 +40,8 @@ class CommentsController extends Controller
       $comment = new Comment;
       $article = Article::all();
       $user = User::all();
+
+      // Check if the user is logged in -> only than, an article can be added
       if (Auth::check()) {
         // $request title & url gaat de 2 uit de form opvragen
         $validator = Validator::make($req->all(),['comment' => 'required|max:255']);
@@ -65,7 +68,6 @@ class CommentsController extends Controller
         return redirect("login")->with(compact('id'));
       }
     }
-
     // Show edit comment
     public function edit($id)
     {
@@ -73,12 +75,21 @@ class CommentsController extends Controller
       return view("comments/edit",compact("comment"));
     }
     // ELOQUENT UPDATE
-    public function update($id){
+    public function update(Request $req,$id)
+    {
       $comment = Comment::findOrFail($id);
-      $comment->update($req->all());
-      return redirect()->back();
+      if (Auth::check()) {
+        // $request title & url gaat de 2 uit de form opvragen
+        $validator = Validator::make($req->all(),['comment' => 'required|max:255']);
+        if ($validator->fails()) {
+          return redirect()->back()
+          -> withErrors($validator);
+        }
+        $comment->comment = $req->comment;
+        $comment->update($req->all());
+      }
+      return redirect("/comments/{$comment->post_id}");
     }
-
     // ELOQUENT DELETE
     public function delete(Request $req, $id)
     {

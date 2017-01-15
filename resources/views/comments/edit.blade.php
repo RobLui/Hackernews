@@ -38,8 +38,7 @@
                 @include("common.errors")
 
                 <!-- Edit -->
-
-                <form action="../edit/{id}" method="POST" class="form-horizontal">
+                <form action="/comments/edit/{{$comment->id}}" method="POST" class="form-horizontal">
                   <div class="form-group">
                     <div class="col-sm-6">
                       <textarea type="text" name="comment" id="comment" class="form-control">{{$comment->comment}}</textarea>
