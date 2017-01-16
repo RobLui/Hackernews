@@ -6,6 +6,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
           <!--  Deze true moet nog een vergelijking worden die ervoor zorgt dat de data enkel te zien is wanneer de andere delete knop is ingedrukt -->
+          @if(false)
           <div class="bg-danger clearfix">
             <br>
               Are you sure you want to delete this comment?
@@ -21,6 +22,7 @@
                 </button>
               </form>
             </div>
+            @endif
           <br>
           <!--DELETE BUTTON  -->
           <a href="../{{$comment->post_id}}">← back to overview</a>
@@ -28,7 +30,7 @@
               <div class="panel panel-default">
                 <div class="panel-heading clearfix">Edit comment
                   <!--  Delete comment button -->
-                  <a href="../delete/{id}" class="btn btn-danger btn-xs pull-right">
+                  <a href="../delete/{{$comment->id}}" class="btn btn-danger btn-xs pull-right">
                     <i class="fa fa-btn fa-trash"></i> delete comment</a>
                 </div>
                 <div class="panel-content">

@@ -101,6 +101,6 @@ class CommentsController extends Controller
       {
             $comment->delete($id);
       }
-      return redirect()->back();
+      return redirect("comments/$comment->post_id");
     }
 }
