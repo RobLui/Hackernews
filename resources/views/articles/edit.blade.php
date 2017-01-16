@@ -8,6 +8,7 @@
           <!--  Deze true moet nog een vergelijking worden die ervoor zorgt dat de data enkel te zien is wanneer de andere delete knop is ingedrukt -->
           <div class="bg-danger clearfix">
             <br>
+            @if("confirm")
               Are you sure you want to delete this article?
               <!--  Working delete =D -->
               <form action="../delete/{{$articles->id}}" method="POST" class="pull-right">
@@ -20,16 +21,16 @@
                     <i class="fa fa-btn fa-trash" title="cancel"></i> cancel
                 </button>
               </form>
+              @endif
             </div>
           <br>
-          <!-- @if(isset($_SESSION["test"])) -->
-          <!-- @endif() -->
+          <!--DELETE BUTTON  -->
           <a href="/../home">← back to overview</a>
             <br><br>
               <div class="panel panel-default">
                 <div class="panel-heading">Edit article
                   <!--  Delete article button -->
-                  <a href="../delete/" class="btn btn-danger btn-xs pull-right">
+                  <a href="../delete/{{$articles->id}}" class="btn btn-danger btn-xs pull-right" id="first_del" name="first_del">
                     <i class="fa fa-btn fa-trash"></i> delete article</a>
                 </div>
                 <br>

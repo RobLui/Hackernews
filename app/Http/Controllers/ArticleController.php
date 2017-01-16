@@ -74,44 +74,53 @@ class ArticleController extends Controller
         return view('articles/edit',compact('articles'));
       }
       else {
-        return redirect("/home");
+        return redirect("/home")->withMessage('msg','You are not the user off this article ');
       }
     }
     // ELOQUENT UPDATE
     public function update(Request $req, $id)
     {
-    $articles = Article::findOrFail($id);
-    // Check if the user is logged in -> only than, an article can be added
-    if (Auth::check()) {
-      // Validation handler
-      $validator = Validator::make($req->all(),[
-      'title' => 'required|max:255',
-      'url' => 'required|max:255'
-    ]);
-    // Validation error, show errors
-    if ($validator->fails()) {
-      return view('/articles/edit')
-      -> withArticles($articles)
-      -> withErrors($validator);
-    }
-    // Check for valid email through regEX
-    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$req->url)) {
-      return view('/articles/edit')
-      -> withArticles($articles)
-      -> withErrors($req->url . " is not a valid URL");
-    } //id no errors occur, the article can update
-      $articles->update($req->all());
-      return redirect("/")->with(compact('id'));
+      $articles = Article::findOrFail($id);
+      // Check if the user is logged in -> only than, an article can be added
+      if (Auth::check())
+      {
+        // Validation handler
+        $validator = Validator::make($req->all(),[
+        'title' => 'required|max:255',
+        'url' => 'required|max:255'
+        ]);
+      // Validation error, show errors
+        if ($validator->fails())
+        {
+          return view('/articles/edit')
+          -> withArticles($articles)
+          -> withErrors($validator);
+        }
+        // Check for valid email through regEX
+        if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$req->url)) {
+          return view('/articles/edit')
+          -> withArticles($articles)
+          -> withErrors($req->url . " is not a valid URL");
+        } //if no errors occur, the article can update
+        $articles->update($req->all());
+        return redirect("/")->with(compact('id'));
       }
     }
     // ELOQUENT DELETE
     public function delete(Request $req, $id)
     {
       $articles = Article::findOrFail($id);
-      // Check if the user is logged in -> only than, an article can be deleted
-      if (Auth::check()) {
-          $articles->delete($req->all());
+      var_dump($req->first_del);
+      //cancell if no delete is wanted
+      if($req->confirm){
+        return redirect("/")->withErrors("test");
+      }
+      if (!$req->cancel)
+      {
+        if (Auth::check() && $req->delete) {
+            $articles->delete($req->all());
         }
+      }
       return redirect("/")->with(compact('id'));
     }
 

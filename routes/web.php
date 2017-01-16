@@ -30,6 +30,8 @@ Auth::routes();
   Route::post('article/edit/{id}', 'ArticleController@update');
   // DELETE articles
   Route::post('/article/delete/{id}', 'ArticleController@delete');
+  Route::get('/article/delete/{id}', 'ArticleController@delete');
+
 
 // COMMENTS
   // SHOW COMMENT view

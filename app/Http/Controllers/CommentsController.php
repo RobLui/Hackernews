@@ -78,12 +78,15 @@ class CommentsController extends Controller
     public function update(Request $req,$id)
     {
       $comment = Comment::findOrFail($id);
-      if (Auth::check()) {
+      // Check if the user of the comment has the intention to edit the comment, if someone else wants to edit..redirect
+      if (Auth::user()->name == $comment->name)
+      {
         // $request title & url gaat de 2 uit de form opvragen
         $validator = Validator::make($req->all(),['comment' => 'required|max:255']);
-        if ($validator->fails()) {
+        if ($validator->fails())
+        {
           return redirect()->back()
-          -> withErrors($validator);
+          -> withErrors($validator)
         }
         $comment->comment = $req->comment;
         $comment->update($req->all());
@@ -94,11 +97,15 @@ class CommentsController extends Controller
     public function delete(Request $req, $id)
     {
       $comment = Comment::findOrFail($id);
-      // Check if the user is logged in -> only than, an article can be deleted
-      if (Auth::check()) {
-          $comment->delete($id);
+      if ($comment->name == Auth::check()->name)
+      {
+        if (!$req->cancel)
+        {
+            $comment->delete($id);
+            return redirect("/")->with(compact('id'));
         }
-      return redirect()->back();
+      }
+      return redirect("/")->with(compact('id'))->withErrors("no");;
     }
 
 }

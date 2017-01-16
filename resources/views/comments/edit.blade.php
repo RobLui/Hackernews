@@ -9,7 +9,7 @@
           <div class="bg-danger clearfix">
             <br>
               Are you sure you want to delete this comment?
-              <!--  Working delete =D -->
+              <!--  DELETE CONFIRM -->
               <form action="../delete/{{$comment->id}}" method="POST" class="pull-right">
                 {{ csrf_field() }}
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -22,14 +22,13 @@
               </form>
             </div>
           <br>
-          <!-- @if(isset($_SESSION["test"])) -->
-          <!-- @endif() -->
+          <!--DELETE BUTTON  -->
           <a href="../{{$comment->post_id}}">← back to overview</a>
             <br><br>
               <div class="panel panel-default">
                 <div class="panel-heading clearfix">Edit comment
                   <!--  Delete comment button -->
-                  <a href="../delete/" class="btn btn-danger btn-xs pull-right">
+                  <a href="../delete/{id}" class="btn btn-danger btn-xs pull-right">
                     <i class="fa fa-btn fa-trash"></i> delete comment</a>
                 </div>
                 <div class="panel-content">
