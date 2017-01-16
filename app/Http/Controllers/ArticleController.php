@@ -4,6 +4,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Notification;
 use resources\views\articles;
 use App\Article;
 use App\User;
@@ -110,14 +111,10 @@ class ArticleController extends Controller
     public function delete(Request $req, $id)
     {
       $articles = Article::findOrFail($id);
-      var_dump($req->first_del);
-      //cancell if no delete is wanted
-      if($req->confirm){
-        return redirect("/")->withErrors("test");
-      }
+      //cancel if no delete is wanted
       if (!$req->cancel)
       {
-        if (Auth::check() && $req->delete) {
+        if (Auth::user()->name == $articles->posted_by) {
             $articles->delete($req->all());
         }
       }

@@ -9,6 +9,7 @@
           <br><br>
           <!--  display errors -->
         @include("common.errors")
+
         <div class="panel panel-default">
           <div class="panel-heading clearfix">
             Article: @foreach($articles as $a) @if($a->id == $comments->post_id) {{$a->title}} @endif @endforeach

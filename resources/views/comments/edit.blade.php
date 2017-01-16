@@ -35,7 +35,6 @@
 
                 <!--  display errors -->
                 @include("common.errors")
-
                 <!-- Edit -->
                 <form action="/comments/edit/{{$comment->id}}" method="POST" class="form-horizontal">
                   <div class="form-group">

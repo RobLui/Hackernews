@@ -97,15 +97,10 @@ class CommentsController extends Controller
     public function delete(Request $req, $id)
     {
       $comment = Comment::findOrFail($id);
-      if ($comment->name == Auth::check()->name)
+      if ($comment->$id == $req->$id)
       {
-        if (!$req->cancel)
-        {
             $comment->delete($id);
-            return redirect("/")->with(compact('id'));
-        }
       }
-      return redirect("/")->with(compact('id'))->withErrors("no");;
+      return redirect()->back();
     }
-
 }

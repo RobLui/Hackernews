@@ -45,7 +45,13 @@
                           <?php $i++; ?>
                         @endif
                       @endforeach
-                      | <a href="comments/{{$article->id}}">{{$i}} comments</a>
+                      | <a href="comments/{{$article->id}}">{{$i}}
+                        @if( $i == 0 || $i > 1 )
+                         comments
+                        @else
+                         comment
+                        @endif
+                        </a>
                      @else not set @endif
                    </div>
                   </th>

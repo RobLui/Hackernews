@@ -6,12 +6,12 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
           <!--  Deze true moet nog een vergelijking worden die ervoor zorgt dat de data enkel te zien is wanneer de andere delete knop is ingedrukt -->
+          @if(false)
           <div class="bg-danger clearfix">
             <br>
-            @if("confirm")
               Are you sure you want to delete this article?
               <!--  Working delete =D -->
-              <form action="../delete/{{$articles->id}}" method="POST" class="pull-right">
+              <form action="../delete/{{$articles->id}}/confirm" method="POST" class="pull-right">
                 {{ csrf_field() }}
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <button name="delete" class="btn btn-danger" value="7">
@@ -21,8 +21,8 @@
                     <i class="fa fa-btn fa-trash" title="cancel"></i> cancel
                 </button>
               </form>
-              @endif
             </div>
+            @endif
           <br>
           <!--DELETE BUTTON  -->
           <a href="/../home">← back to overview</a>
