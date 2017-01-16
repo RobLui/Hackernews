@@ -86,7 +86,7 @@ class CommentsController extends Controller
         if ($validator->fails())
         {
           return redirect()->back()
-          -> withErrors($validator)
+          -> withErrors($validator);
         }
         $comment->comment = $req->comment;
         $comment->update($req->all());
