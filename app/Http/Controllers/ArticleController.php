@@ -83,7 +83,7 @@ class ArticleController extends Controller
     {
       $articles = Article::findOrFail($id);
       // Check if the user is logged in -> only than, an article can be added
-      if (Auth::check())
+      if (Auth::user()->name == $articles->posted_by)
       {
         // Validation handler
         $validator = Validator::make($req->all(),[
@@ -104,8 +104,8 @@ class ArticleController extends Controller
           -> withErrors($req->url . " is not a valid URL");
         } //if no errors occur, the article can update
         $articles->update($req->all());
-        return redirect("/")->with(compact('id'));
       }
+      return redirect("/")->with(compact('id'));
     }
     // ELOQUENT DELETE
     public function delete(Request $req, $id)
