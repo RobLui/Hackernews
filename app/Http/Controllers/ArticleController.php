@@ -13,11 +13,6 @@ use Auth;
 
 class ArticleController extends Controller
 {
-    public   function __construct()
-    {
-
-    }
-
     public function index(request $req)
     {
       $user = User::all();
@@ -104,8 +99,8 @@ class ArticleController extends Controller
           -> withErrors($req->url . " is not a valid URL");
         } //if no errors occur, the article can update
         $articles->update($req->all());
+        return redirect("/")->with(compact('id'));
       }
-      return redirect("/")->with(compact('id'));
     }
     // ELOQUENT DELETE
     public function delete(Request $req, $id)

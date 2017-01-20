@@ -38,33 +38,38 @@ class CommentsController extends Controller
     public function create(Request $req,$id)
     {
       $comment = new Comment;
-      $article = Article::all();
+      $article = Article::all()->where('id', $id)->first();
+      // Check if there is an article with id to post a comment on..
       $user = User::all();
-
-      // Check if the user is logged in -> only than, an article can be added
-      if (Auth::check()) {
-        // $request title & url gaat de 2 uit de form opvragen
-        $validator = Validator::make($req->all(),['comment' => 'required|max:255']);
-        if ($validator->fails()) {
-          return redirect()->back()
-          -> withErrors($validator);
-        }
-        if(count($req->comment) > 0 && $req->comment != NULL)
+      if($article)
+      {
+        // Check if the user is logged in -> only than, an article can be added
+        if (Auth::check())
         {
-          $comment->comment = $req->comment;
-          $comment->name = Auth::user()->name;
-          $comment->post_id =$id;
-          $comment->save();
-          return redirect()->back();
-        }
-        else
-        {
+          // $request title & url gaat de 2 uit de form opvragen
+          $validator = Validator::make($req->all(),['comment' => 'required|max:255']);
+          if ($validator->fails()) {
+            return redirect()->back()
+            -> withErrors($validator);
+          }
+          if(count($req->comment) > 0 && $req->comment != NULL)
+          {
+            $comment->comment = $req->comment;
+            $comment->name = Auth::user()->name;
+            $comment->post_id = $id;
+            $comment->save();
+            return redirect()->back();
+          }
+          else
+          {
           $error = array();
           $error = ["Whoops! Something went wrong!","The body field is required"];
           return redirect()->back()->withErrors($error);
+          }
         }
       }
-      else{
+      else
+      {
         return redirect("login")->with(compact('id'));
       }
     }
