@@ -15,43 +15,49 @@
                    <tr>
                     <th>
                     @if(isset(Auth::user()->name))
-                    <div class="vote">
+                      <div class="vote">
                     @else
-                    <div class="vote disabled">
+                      <div class="vote disabled">
                     @endif
-                     <div class="form-inline upvote"><button class="up-down">
-                         <i class="fa fa-caret-up"></i></button>
+                    <form class="form-group" action="../registerVote/{{$article->id}}" method="POST">
+                       <div class="form-inline upvote">
+                         <button class="up-down" name="up" id="up">
+                           <i class="fa fa-caret-up"></i>
+                         </button>
+                       </div>
+                       <div class="form-inline downvote">
+                         <button class="up-down" name="down" id="down">
+                          <i class="fa fa-caret-down"></i>
+                        </button>
+                       </div>
+                     </form>
                      </div>
-                     <div class="form-inline downvote"><button class="up-down">
-                        <i class="fa fa-caret-down"></i></button>
+                     <div class="url">&nbsp;
+                       <a href="{{$article->url}}" class="urlTitle">{{$article->title}}</a>
+                        @if(isset(Auth::user()->name))
+                          @if(Auth::user()->name == $article->posted_by)
+                            <a href="article/edit/{{$article->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
+                          @endif
+                        @endif
                      </div>
-                   </div>
-                   <div class="url">&nbsp;
-                     <a href="{{$article->url}}" class="urlTitle">{{$article->title}}</a>
-                      @if(isset(Auth::user()->name))
-                        @if(Auth::user()->name == $article->posted_by)
-                          <a href="article/edit/{{$article->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
-                        @endif
-                      @endif
-                   </div>
-                   <div class="info"> &nbsp;&nbsp;&nbsp;&nbsp;{{$article->votes}} point
-                     @if($article->votes > 1)s @endif
-                     | posted by
-                     @if(isset($article->posted_by))
-                      {{{$article->posted_by}}}
-                      <?php $i=0; ?>
-                      @foreach($comments as $comment)
-                        @if($comment->post_id == $article->id)
-                          <?php $i++; ?>
-                        @endif
-                      @endforeach
-                      | <a href="comments/{{$article->id}}">{{$i}}
-                        @if( $i == 0 || $i > 1 )
-                         comments
-                        @else
-                         comment
-                        @endif
-                        </a>
+                     <div class="info"> &nbsp;&nbsp;&nbsp;&nbsp;{{$article->votes}} point
+                       @if($article->votes > 1)s @endif
+                       | posted by
+                       @if(isset($article->posted_by))
+                        {{{$article->posted_by}}}
+                        <?php $i=0; ?>
+                        @foreach($comments as $comment)
+                          @if($comment->post_id == $article->id)
+                            <?php $i++; ?>
+                          @endif
+                        @endforeach
+                        | <a href="comments/{{$article->id}}">{{$i}}
+                          @if( $i == 0 || $i > 1 )
+                           comments
+                          @else
+                           comment
+                          @endif
+                          </a>
                      @else not set @endif
                    </div>
                   </th>

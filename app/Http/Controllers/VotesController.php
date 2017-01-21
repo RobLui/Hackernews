@@ -21,33 +21,46 @@ class VotesController extends Controller
     $votes = Votes::all();
     // Check the name of current logged in user -> later used for checks in database
     $user = Auth::user()->name;
+    // Check all votes on an article -> this should later be added to articles value
+    $article_votes = Votes::all()->where('id', $id);
     // Er bestaan votes in de database
-    if ($votes->voted_by != NULL || $votes->voted_by != " ")
+    if ($votes->voted_by != NULL && $votes->voted_by != " ")
     {
-      // *Check the amount of votes the article currently has*
-      //------ Maak een tabel bij article bij dat de upvotes & downvotes bijhoudt
-
-      // User has voted on article before
+      // If user has voted on article before
         // 1. Check what article the user voted on                         -> Add article id into article_id
         // 2. Add the user's name into database                            -> Add $user into voted_by
         // 3. Check if the user up or downvoted an article                 -> Check for value in database @ up_down
           // If upvoted before (up_down value == "up")
-            // value = -1  (bij downvote)                                  -> Change "up" to "down" into the up_down table
+            // value = -1  (bij downvote)                                  -> Change "up" to "down" into the up_down row
             // value = +1  (bij upvote)
           // If downvoted before (up_down value == "down")
-            // value = +1 (bij upvote)                                     -> Change "down" to "up" into the up_down table
+            // value = +1 (bij upvote)                                     -> Change "down" to "up" into the up_down row
             // value = -1  (bij downvote)
 
-      // User hasn't voted on article before
-        // Create a vote on the preferred article
-          // Check for up or downvote                                      -> Check wich arrow was clicked, up or down
-          // If upvoted value = -1                                         -> Add "up" into the up_down table
-          // If downvoted value = +1                                       -> Add "down" into the up_down table
+      // If user hasn't voted on article before
+        // 1. Check what article the user voted on                         -> Add article id into article_id
+          $votes->article_id = $id;
+        // 2. Add the user's name into database                            -> Add $user into voted_by
+          $votes->voted_by = $user;
+        // 3. Check if the user up or downvoted an article                 -> Check wich arrow was clicked, up or down
+          // Check for the post containing up or down
+            // If upvoted, value = +1                                      -> Add "up" into the up_down table
+            if ($req->up)
+            {
+              $votes->up_down = "up";
+              $votes->value = 1;
+            }
+            // If downvoted, value = -1                                    -> Add "down" into the up_down table
+            if ($req->down)
+            {
+              $votes->up_down = "down";
+              $votes->value = -1;
+            }
     }
     // Er bestaan geen votes in de database -> Voorzorg? :)
     else
     {
-      return redirect("/")->with(compact('id'));
+      return redirect()->back()->with(compact('id'));
     }
   }
 
