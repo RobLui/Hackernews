@@ -12,6 +12,7 @@ class CreateVotes extends Migration
           $table->increments('id');
           $table->string('up_down');
           $table->string('voted_by');
+          $table->integer('value');
           $table->integer('article_id')->unsigned();
           $table->softDeletes();
       });

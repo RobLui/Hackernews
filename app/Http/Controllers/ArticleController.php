@@ -116,31 +116,6 @@ class ArticleController extends Controller
       return redirect("/")->with(compact('id'));
     }
 
-    // -------------------------------------------------------------------------
-    // VOORBEREIDING VOTING
-    // -------------------------------------------------------------------------
-    // Voting...THINGS TO CHECK FOR WHEN SEARCHING A WAY TO VOTE -- Robbert ----
-
-    // *Check if user has voted on article*
-    //------ Kijk in tabel in database, voeg toe als de user vote
-
-    // *If user voted, check for wich vote, up or downvote?*
-    //------ Voeg up of downvote in database toe
-
-    // *Check the amount of votes the article currently has*
-    //------ Maak een tabel bij article bij dat de upvotes & downvotes bijhoudt
-
-    // *Subtract -1 if downvote has been clicked and if not upvoted yet*
-    // *Add +2 if downvoted already, and upvote has been clicked*
-    //------ Ga toevoegen of aftrekken van tabel
-
-    // *Add +1 if upvote has been clicked and if not downvoted yet*
-    // *Subtract -2 if upvoted already, and downvote has been clicked*
-    //------ Ga toevoegen of aftrekken van tabel
-    // -------------------------------------------------------------------------
-    // -------------------------------------------------------------------------
-
-
   // EDIT VIEW
     // public function index_edit(Request $request,$id){
     //   $articles = Article::all();
