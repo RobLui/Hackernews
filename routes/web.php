@@ -45,6 +45,9 @@ Auth::routes();
   Route::get('/comments/delete/{id}','CommentsController@delete');
   Route::post('/comments/delete/{id}','CommentsController@delete');
 
+  Route::post('/registerVote/{id}','VotesController@update');
+
+
   // ARTICLES - OLD WORKING FUNCTIONS USING PDO
     // SHOW EDIT view
     // Route::get('article/edit/{id}', 'ArticleController@index_edit');

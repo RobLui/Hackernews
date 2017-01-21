@@ -20,6 +20,8 @@
                       <div class="vote disabled">
                     @endif
                     <form class="form-group" action="../registerVote/{{$article->id}}" method="POST">
+                      {{ csrf_field() }}
+                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
                        <div class="form-inline upvote">
                          <button class="up-down" name="up" id="up">
                            <i class="fa fa-caret-up"></i>

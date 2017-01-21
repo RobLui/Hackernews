@@ -50,7 +50,7 @@ class ArticleController extends Controller
           // $request title & url = get data from both out of the submitted form
           $articles->title = $request->title;
           $articles->url = $request->url;
-          $articles->votes = "1";
+          $articles->votes = "0";
           $articles->posted_by = Auth::user()->name;
           // Save into db
           $articles->save();

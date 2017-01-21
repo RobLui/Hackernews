@@ -23,7 +23,7 @@ class CommentsController extends Controller
       $article->url = $req->url;
       $article->title = $req->title;
       $article->posted_by = $req->name;
-      $article->votes = 1;
+      $article->votes = 0;
 
       $comment->name = $req->name;
       $comment->post_id = $req->id; // deze werkt
