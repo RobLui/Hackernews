@@ -19,18 +19,17 @@
                     @else
                       <div class="vote disabled">
                     @endif
-                    <form class="form-group" action="../registerVote/{{$article->id}}" method="POST">
-                      {{ csrf_field() }}
-                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <form class="form-group" action="/registerVote/{{$article->id}}" method="POST">
                        <div class="form-inline upvote">
-                         <button class="up-down" name="up" id="up">
+                         <button class="up-down" name="up" id="up" value="up">
                            <i class="fa fa-caret-up"></i>
                          </button>
                        </div>
                        <div class="form-inline downvote">
-                         <button class="up-down" name="down" id="down">
-                          <i class="fa fa-caret-down"></i>
+                         <button class="up-down" name="down" id="down" value="down">
+                          <i class="fa fa-caret-down" ></i>
                         </button>
+                        {{ csrf_field() }}
                        </div>
                      </form>
                      </div>

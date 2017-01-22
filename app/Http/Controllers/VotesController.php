@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Comment;
-use App\Article;
-use App\Votes;
-use App\User;
 use Auth;
+use App\User;
+use App\Article;
+use App\Comment;
+use App\Votes;
 
 class VotesController extends Controller
 {
@@ -16,13 +16,41 @@ class VotesController extends Controller
     // 'voted_by'   -> naam
     // "value"      -> -1 of +1
 
+
+
+  // If user hasn't voted on article before
+  function create(Request $req ,$id)
+  {
+    $user = Auth::user()->name;
+    // Create a new vote
+    $vote = new Votes;
+    // 1. Check what article the user voted on                         -> Add article id into article_id
+    $vote->article_id = $id;
+    // 2. Add the user's name into database                            -> Add $user into voted_by
+    $vote->voted_by = $user;
+    // 3. Check if the user up or downvoted an article                 -> Check wich arrow was clicked, up or down
+    // Check for the post containing up or down
+      // If upvoted, value = +1                                      -> Add "up" into the up_down table
+    if ($req->input('up'))
+    {
+      $vote->up_down = "up";
+      $vote->value = 1;
+    }
+    // If downvoted, value = -1                                    -> Add "down" into the up_down table
+    if ($req->input('down'))
+    {
+      $vote->up_down = "down";
+      $vote->value = -1;
+    }
+    $vote->save();
+    return redirect()->back();
+  }
+
   function update(Request $req ,$id)
   {
-    // Get all votes in the database
-    $votes = Votes::all();
+    var_dump("test");
     // Check the name of current logged in user -> later used for checks in database
     $user = Auth::user()->name;
-
     // Check if there are votes in the database on an article
     $article_votes = Votes::all()->where('$article_id', $id);
     // Check of er al votes bestaan in de database
@@ -40,50 +68,27 @@ class VotesController extends Controller
           {
             if ($a_v_b->posted_by == $user)
             {
-              if ($req->up) //if upvoted
+              if ($req->input('up'))
               {
                 $votes->up_down = "up"; // If upvoted (up_down value == "up")
-                $votes->value = 1; // value = +1 (bij upvote)
+                $votes->value = 1; // value   = +1 (bij upvote)
               }
-              if ($req->down) // if downvoted
+              if ($req->input('down')) // if downvoted
               {
                 $votes->up_down = "down"; // If downvoted (up_down value == "down")
                 $votes->value = -1; // value = -1  (bij downvote)
               }
               $a_v_b->update();
+              }
             }
           }
         }
       }
-      // If user hasn't voted on article before
       else
       {
-        // Create a new vote
-        $vote = new Vote;
-        // 1. Check what article the user voted on                         -> Add article id into article_id
-        $vote->article_id = $id;
-        // 2. Add the user's name into database                            -> Add $user into voted_by
-        $vote->voted_by = $user;
-        // 3. Check if the user up or downvoted an article                 -> Check wich arrow was clicked, up or down
-        // Check for the post containing up or down
-          // If upvoted, value = +1                                      -> Add "up" into the up_down table
-        if ($req->up)
-        {
-          $vote->up_down = "up";
-          $vote->value = 1;
-        }
-        // If downvoted, value = -1                                    -> Add "down" into the up_down table
-        if ($req->down)
-        {
-          $vote->up_down = "down";
-          $vote->value = -1;
-        }
-        $vote->save();
+        create($req ,$id);
       }
-    }
-    // Er bestaan geen votes in de database -> Voorzorg? :)
-    return redirect()->back()->with(compact('id'));
   }
-
-
+  // Er bestaan geen votes in de database -> Voorzorg? :)
+  // return redirect("/");
 }

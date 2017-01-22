@@ -14,6 +14,7 @@ class CreateVotes extends Migration
           $table->string('voted_by');
           $table->integer('value');
           $table->integer('article_id')->unsigned();
+          $table->timestamps();
           $table->softDeletes();
       });
     }

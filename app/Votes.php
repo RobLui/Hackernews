@@ -10,9 +10,6 @@ class Votes extends Model
   use SoftDeletes;
 
   protected $fillable = [
-       'up_down',
-       'voted_by',
-       'article_id',
-       'value'
+       'up_down','voted_by','article_id','value'
   ];
 }

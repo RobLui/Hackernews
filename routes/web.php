@@ -29,7 +29,7 @@ Auth::routes();
   // UPDATE article
   Route::post('article/edit/{id}', 'ArticleController@update');
   // DELETE articles
-  Route::post('/article/delete/{id}', 'ArticleController@delete');
+  Route::post('/article/delete/{id}', 'ArticleControlsler@delete');
   Route::get('/article/delete/{id}', 'ArticleController@delete');
 
 
@@ -43,9 +43,12 @@ Auth::routes();
   Route::post('/comments/edit/{id}','CommentsController@update');
   // DELETE comments
   Route::get('/comments/delete/{id}','CommentsController@delete');
-  Route::post('/comments/delete/{id}','CommentsController@delete');
 
-  Route::post('/registerVote/{id}','VotesController@update');
+// VOTES
+  Route::post('/registerVote/{id}','VotesController@create');
+  Route::get('/registerVote/{id}','VotesController@create');
+
+
 
 
   // ARTICLES - OLD WORKING FUNCTIONS USING PDO

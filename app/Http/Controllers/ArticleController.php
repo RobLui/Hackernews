@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Notification;
 use resources\views\articles;
-use App\Article;
-use App\User;
-use App\Comment;
 use Auth;
+use App\User;
+use App\Article;
+use App\Comment;
+use App\Votes;
 
 class ArticleController extends Controller
 {
