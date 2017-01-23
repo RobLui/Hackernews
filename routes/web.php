@@ -48,6 +48,9 @@ Auth::routes();
   Route::post('/registerVote/{id}','VotesController@create');
   Route::get('/registerVote/{id}','VotesController@create');
 
+  Route::get('/registerVote/{id}/update','VotesController@update');
+  Route::get('/registerVote/{id}/update','VotesController@update');
+
 
 
 
