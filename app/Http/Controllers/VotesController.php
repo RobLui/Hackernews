@@ -22,11 +22,11 @@ class VotesController extends Controller
     session_start();
     //article id in database?
     $article_votes = Votes::all()->where('article_id',$id);
-    $votesAll = Votes::all();
+    $user = Auth::user()->name;
+    $votes_by_user = Votes::all()->where('user',$user);
     // if it's not in the database..
     if (count($article_votes) == 0)
     {
-      $user = Auth::user()->name;
       // Create a new vote
       $vote = new Votes;
       // 1. Check what article the user voted on                         -> Add article id into article_id
@@ -53,17 +53,15 @@ class VotesController extends Controller
     {
       if ($req->input('up'))
       {
-        $use_me = "up";
         $_SESSION["updown"] = $req->input('up');
       }
       if ($req->input('down'))
       {
-        $use_me = "down";
         $_SESSION["updown"] = $req->input('down');
       }
       return redirect("/registerVote/$id/update");
     }
-    return redirect()->back();
+    return redirect()->back()->withVotes($vote);
   }
 
   function update(Request $req ,$id)
@@ -80,7 +78,7 @@ class VotesController extends Controller
     $voted_art = Votes::all()->where('voted_by', $user);
 
     // 2. Check if the user has already voted on an article (geeft alle artikels terug waar de user op gevote heeft)
-    if (count($article_votes) > 0)
+    if (count($voted_art) > 0)
     {
       // Overloop elk artikel
       foreach ($voted_art as $va)
@@ -101,6 +99,6 @@ class VotesController extends Controller
         }
       }
     }
-    return redirect()->back();
+    return redirect()->back()->withVotes($voted_art);
   }
 }
