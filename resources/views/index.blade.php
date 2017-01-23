@@ -19,19 +19,33 @@
                     @else
                       <div class="vote disabled">
                     @endif
-                    <form class="form-group" action="/registerVote/{{$article->id}}" method="POST">
-                       <div class="form-inline upvote">
-                         <button class="up-down" name="up" id="up" value="up">
-                           <i class="fa fa-caret-up"></i>
-                         </button>
-                       </div>
-                       <div class="form-inline downvote">
-                         <button class="up-down" name="down" id="down" value="down">
-                          <i class="fa fa-caret-down" ></i>
-                        </button>
-                        {{ csrf_field() }}
-                       </div>
-                     </form>
+                    @foreach($votes as $vote)
+                      @if($vote->voted_by == Auth::user()->name && $article->id == $vote->article_id)
+                      <form class="form-group" action="/registerVote/{{$article->id}}" method="POST">
+                        @if($vote->up_down == "up")
+                         <div class="form-inline upvote disabled">
+                        @endif
+                        @if($vote->up_down == "down")
+                        <div class="form-inline upvote">
+                        @endif
+                           <button class="up-down" name="up" id="up" value="up">
+                             <i class="fa fa-caret-up"></i>
+                           </button>
+                         </div>
+                         @if($vote->up_down == "down")
+                          <div class="form-inline downvote disabled">
+                         @endif
+                         @if($vote->up_down == "up")
+                          <div class="form-inline downvote">
+                         @endif
+                           <button class="up-down" name="down" id="down" value="down">
+                            <i class="fa fa-caret-down" ></i>
+                          </button>
+                          {{ csrf_field() }}
+                         </div>
+                       </form>
+                       @endif
+                     @endforeach()
                      </div>
                      <div class="url">&nbsp;
                        <a href="{{$article->url}}" class="urlTitle">{{$article->title}}</a>

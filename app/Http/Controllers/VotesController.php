@@ -85,27 +85,22 @@ class VotesController extends Controller
       // Overloop elk artikel
       foreach ($voted_art as $va)
       {
-        // if ($va->article_id == $id) // -> Compare article id ($id) with the one in the database ($a_v_b->article_id)
-        // {
-          // if ($va->posted_by == $user)
-          // {
-          if ($_SESSION["updown"] == "up")
-          {
-            $va->up_down = "up"; // If upvoted (up_down value == "up")
-            $va->value = 1; // value   = +1 (bij upvote)
-          }
-          if ($_SESSION["updown"] == "down") // if downvoted
-          {
-            $va->up_down = "down"; // If downvoted (up_down value == "down")
-            $va->value = -1; // value = -1  (bij downvote)
-          }
+        if ($va->article_id == $id) // -> Compare article id ($id) with the one in the database ($a_v_b->article_id)
+        {
+            if ($_SESSION["updown"] == "up")
+            {
+              $va->up_down = "up"; // If upvoted (up_down value == "up")
+              $va->value = 1; // value   = +1 (bij upvote)
+            }
+            if ($_SESSION["updown"] == "down") // if downvoted
+            {
+              $va->up_down = "down"; // If downvoted (up_down value == "down")
+              $va->value = -1; // value = -1  (bij downvote)
+            }
             $va->update();
-        // }
+        }
       }
     }
+    return redirect()->back();
   }
-  // }
-    // return redirect()->back();
-  // Er bestaan geen votes in de database -> Voorzorg? :)
-  // return redirect("/");
 }

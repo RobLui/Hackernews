@@ -19,12 +19,14 @@ class ArticleController extends Controller
       $user = User::all();
       $article = Article::all();
       $comment = Comment::all();
+      $vote = Votes::all();
 
       $article->votes = 1;
       $user->name = $req->name;
       return view('index')
       ->withArticles($article)
-      ->withComments($comment);
+      ->withComments($comment)
+      ->withVotes($vote);
     }
     // CREATE
     public function create(Request $request)
