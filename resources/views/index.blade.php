@@ -19,51 +19,46 @@
                     @else
                       <div class="vote disabled">
                     @endif
+                    <form class="form-group" action="/registerVote/{{$article->id}}" method="POST">
                     @foreach($votes as $vote) <!-- 1 -->
-                      @if($vote->voted_by == Auth::user()->name) <!-- 2 -->
+                      @if(isset(Auth::user()->name)) <!-- name -->
                         @if($article->id == $vote->article_id) <!-- 3 -->
-                          <form class="form-group" action="/registerVote/{{$article->id}}" method="POST">
-                            @if($vote->up_down == "up") <!-- A -->
-                              <div class="form-inline upvote disabled">
-                            @endif <!-- A -->
-                            @if($vote->up_down == "down") <!-- B -->
-                              <div class="form-inline upvote">
-                            @endif <!-- B -->
+                            @if($vote->voted_by == Auth::user()->name) <!-- x -->
+                              @if($vote->up_down == "up") <!-- A -->
+                                <div class="form-inline upvote disabled">
+                              @endif <!-- A -->
+                              @if($vote->up_down == "down" || $vote->up_down == "default") <!-- B -->
+                                <div class="form-inline upvote">
+                              @endif <!-- B -->
+                            @else <!-- x -->
+
+                            <div class="form-inline upvote" >
+                            @endif <!-- x -->
                                 <button class="up-down" name="up" id="up" value="up">
                                   <i class="fa fa-caret-up"></i>
                                 </button>
+                                {{ csrf_field() }}
                               </div>
-                            @if($vote->up_down == "down") <!-- C -->
-                              <div class="form-inline downvote disabled">
-                            @endif <!-- C -->
-                            @if($vote->up_down == "up") <!-- D -->
+                            @if($vote->voted_by == Auth::user()->name) <!-- x -->
+                              @if($vote->up_down == "down") <!-- C -->
+                                <div class="form-inline downvote disabled">
+                              @endif <!-- C -->
+                              @if($vote->up_down == "up" || $vote->up_down == "default")<!-- D -->
+                                <div class="form-inline downvote">
+                              @endif <!-- D -->
+                            @else  <!-- x -->
                               <div class="form-inline downvote">
-                            @endif <!-- D -->
+                            @endif <!-- x -->
                                 <button class="up-down" name="down" id="down" value="down">
                                   <i class="fa fa-caret-down" ></i>
                                 </button>
                                 {{ csrf_field() }}
-                              </div>
-                          </form>
+                            </div>
                         @endif <!-- 3 -->
-                      @else <!-- 2 -->
-                      <form class="form-group" action="/registerVote/{{$article->id}}" method="POST">
-                      <div class="form-inline upvote">
-                      <button class="up-down" name="up" id="up" value="up">
-                      <i class="fa fa-caret-up"></i>
-                      </button>
-                      </div>
-                      <div class="form-inline downvote">
-                      <button class="up-down" name="down" id="down" value="down">
-                      <i class="fa fa-caret-down" ></i>
-                      </button>
-                      {{ csrf_field() }}
-                      </div>
-                      </form>
-                      @endif <!-- 2 -->
+                      @endif <!-- name -->
                     @endforeach <!-- 1 -->
-
-                     </div>
+                  </form>
+                  </div>
                      <div class="url">&nbsp;
                        <a href="{{$article->url}}" class="urlTitle">{{$article->title}}</a>
                         @if(isset(Auth::user()->name))

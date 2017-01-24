@@ -6640,7 +6640,7 @@
         .disabled {
             color: lightgrey;
         }
-        
+
         .comments {
             padding: 32px 0;
         }
@@ -6653,4 +6653,8 @@
 
         .comments li {
             margin: 16px 0 32px 0;
+        }
+        
+        .hidden {
+            display: none;
         }

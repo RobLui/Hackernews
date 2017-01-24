@@ -21,34 +21,22 @@ class VotesController extends Controller
   {
     session_start();
     //article id in database?
-    $article_votes = Votes::all()->where('article_id',$id);
     $user = Auth::user()->name;
-    $votes_by_user = Votes::all()->where('user',$user);
+    $diff_voters = Votes::all();
+    $article_votes = Votes::all()->where('article_id',$id);
+    $voted_by = Votes::all()->where('voted_by', $user)->where('article_id',$id);
+
+    $vote = new Votes;
     // if it's not in the database..
-    if (count($article_votes) == 0)
-    {
-      // Create a new vote
-      $vote = new Votes;
-      // 1. Check what article the user voted on                         -> Add article id into article_id
-      $vote->article_id = $id;
-      // 2. Add the user's name into database                            -> Add $user into voted_by
-      $vote->voted_by = $user;
-      // 3. Check if the user up or downvoted an article                 -> Check wich arrow was clicked, up or down
-      // Check for the post containing up or down
-        // If upvoted, value = +1                                      -> Add "up" into the up_down table
-      if ($req->input('up'))
+      if (count($voted_by) == 0)
       {
-        $vote->up_down = "up";
-        $vote->value = 1;
+        // Create a new vote
+        $vote->article_id = $id;
+        $vote->value = 0;
+        $vote->voted_by = $user;
+        $vote->up_down = "default";
+        $vote->save();
       }
-      // If downvoted, value = -1                                    -> Add "down" into the up_down table
-      if ($req->input('down'))
-      {
-        $vote->up_down = "down";
-        $vote->value = -1;
-      }
-      $vote->save();
-    }
     else
     {
       if ($req->input('up'))
@@ -59,6 +47,7 @@ class VotesController extends Controller
       {
         $_SESSION["updown"] = $req->input('down');
       }
+      $vote->voted_by = $user;
       return redirect("/registerVote/$id/update");
     }
     return redirect()->back()->withVotes($vote);
@@ -72,11 +61,32 @@ class VotesController extends Controller
     // Check if there are votes in the database on an article
     $article_votes = Votes::all()->where('article_id', $id);
     // Check of er al votes bestaan in de database
+    $voted_by = Votes::all()->where('voted_by', "default");
 
     // If user has voted on article before
     // 1. Check what article(s) the user voted on
     $voted_art = Votes::all()->where('voted_by', $user);
 
+    if(count($voted_by) == 0)
+    {
+      foreach ($voted_by as $vb)
+      {
+        if ($vb->article_id == $id) // -> Compare article id ($id) with the one in the database ($a_v_b->article_id)
+        {
+            if ($_SESSION["updown"] == "up")
+            {
+              $vb->up_down = "up"; // If upvoted (up_down value == "up")
+              $vb->value = 1; // value   = +1 (bij upvote)
+            }
+            if ($_SESSION["updown"] == "down") // if downvoted
+            {
+              $vb->up_down = "down"; // If downvoted (up_down value == "down")
+              $vb->value = -1; // value = -1  (bij downvote)
+            }
+            $vb->update();
+        }
+      }
+    }
     // 2. Check if the user has already voted on an article (geeft alle artikels terug waar de user op gevote heeft)
     if (count($voted_art) > 0)
     {
@@ -99,6 +109,7 @@ class VotesController extends Controller
         }
       }
     }
+
     return redirect()->back()->withVotes($voted_art);
   }
 }

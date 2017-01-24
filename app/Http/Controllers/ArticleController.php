@@ -49,14 +49,24 @@ class ArticleController extends Controller
           }
           // No validation error, continue..
           $articles = new Article;
+          $votes = new Votes;
+
+          $vote = Votes::all();
           $user = User::all();
           // $request title & url = get data from both out of the submitted form
           $articles->title = $request->title;
           $articles->url = $request->url;
           $articles->votes = "0";
           $articles->posted_by = Auth::user()->name;
-          // Save into db
           $articles->save();
+
+          $votes->article_id = $articles->id;
+          $votes->voted_by = "default";
+          $votes->value = 0;
+          $votes->up_down = "";
+          $votes->save();
+
+          // Save into db
           return redirect("/");
           }
           else
