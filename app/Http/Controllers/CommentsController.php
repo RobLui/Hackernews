@@ -67,13 +67,13 @@ class CommentsController extends Controller
           $error = array();
           $error = ["Whoops! Something went wrong!","The body field is required"];
           return redirect()->back()->withErrors($error);
-          }
         }
-      }
+        }
       else
       {
         return redirect("login")->with(compact('id'));
       }
+    }
     }
     // Show edit comment
     public function edit($id)
