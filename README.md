@@ -1,7 +1,7 @@
 ## Hackernews
 
 + Hackernews: (robbertluit.be)
- + [Hackernews](http://www.robbertluit.be)
+ + [Hackernews](https://robbertluit.frb.io)
  + /home
  + /edit/
  + /article/edit/
