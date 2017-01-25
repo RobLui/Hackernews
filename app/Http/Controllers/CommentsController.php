@@ -9,6 +9,7 @@ use App\Article;
 use App\User;
 use Auth;
 use Illuminate\Support\Facades\URL;
+use Session;
 
 class CommentsController extends Controller
 {
@@ -43,6 +44,7 @@ class CommentsController extends Controller
       $user = User::all();
       if($article)
       {
+        Session::flash("success", "Comment was succesfully created");
         // Check if the user is logged in -> only than, an article can be added
         if (Auth::check())
         {
@@ -95,6 +97,7 @@ class CommentsController extends Controller
         }
         $comment->comment = $req->comment;
         $comment->update($req->all());
+        Session::flash("success", "Comment was succesfully updated");
       }
       return redirect("/comments/{$comment->post_id}");
     }
@@ -105,6 +108,7 @@ class CommentsController extends Controller
       if ($comment->$id == $req->$id)
       {
             $comment->delete($id);
+            Session::flash("success", "Comment was succesfully deleted");
       }
       return redirect("comments/$comment->post_id");
     }

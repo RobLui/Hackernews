@@ -11,6 +11,7 @@ use App\User;
 use App\Article;
 use App\Comment;
 use App\Votes;
+use Session;
 
 class ArticleController extends Controller
 {
@@ -66,6 +67,7 @@ class ArticleController extends Controller
           $votes->up_down = "";
           $votes->save();
 
+          Session::flash("success", ($request->title ." was succesfully created"));
           // Save into db
           return redirect("/");
           }
@@ -112,6 +114,7 @@ class ArticleController extends Controller
           -> withErrors($req->url . " is not a valid URL");
         } //if no errors occur, the article can update
         $articles->update($req->all());
+        Session::flash("success", ($req->title ." was succesfully updated"));
         return redirect("/")->with(compact('id'));
       }
     }
@@ -124,6 +127,7 @@ class ArticleController extends Controller
       {
         if (Auth::user()->name == $articles->posted_by) {
             $articles->delete($req->all());
+            Session::flash("success", ("Succesfully deleted the article"));
         }
       }
       return redirect("/")->with(compact('id'));

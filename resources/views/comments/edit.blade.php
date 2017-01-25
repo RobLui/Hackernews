@@ -5,28 +5,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-          <!--  Deze true moet nog een vergelijking worden die ervoor zorgt dat de data enkel te zien is wanneer de andere delete knop is ingedrukt -->
-          @if(false)
-          <div class="bg-danger clearfix">
-            <br>
-              Are you sure you want to delete this comment?
-              <!--  DELETE CONFIRM -->
-              <form action="../delete/{{$comment->id}}" method="POST" class="pull-right">
-                {{ csrf_field() }}
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button name="delete" class="btn btn-danger" value="7">
-                    <i class="fa fa-btn fa-trash" title="delete"></i> confirm delete
-                </button>
-                <button name="cancel" class="btn" value="7">
-                    <i class="fa fa-btn fa-trash" title="cancel"></i> cancel
-                </button>
-              </form>
-            </div>
-            @endif
-          <br>
+
           <!--DELETE BUTTON  -->
           <a href="../{{$comment->post_id}}">← back to overview</a>
             <br><br>
+            @include("common.messages")
               <div class="panel panel-default">
                 <div class="panel-heading clearfix">Edit comment
                   <!--  Delete comment button -->

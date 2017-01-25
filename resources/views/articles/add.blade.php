@@ -11,8 +11,9 @@
               <div class="panel-heading">Add article</div>
               <br>
                 <div class="panel-content">
-                <!--  display errors -->
+                <!--  display errors and messages -->
                 @include("common.errors")
+                @include("common.messages")
                 <!-- New article Form - /add wordt achter de link bijgevoegd -->
                 <form action="{{ url('article/add') }}" method="POST" class="form-horizontal">
                 {{ csrf_field() }}
