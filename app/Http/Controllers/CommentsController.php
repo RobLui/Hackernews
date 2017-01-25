@@ -44,7 +44,6 @@ class CommentsController extends Controller
       $user = User::all();
       if($article)
       {
-        Session::flash("success", "Comment was succesfully created");
         // Check if the user is logged in -> only than, an article can be added
         if (Auth::check())
         {
@@ -54,13 +53,17 @@ class CommentsController extends Controller
             return redirect()->back()
             -> withErrors($validator);
           }
-          if(count($req->comment) > 0 && $req->comment != NULL)
+          if (!$validator->fails())
           {
-            $comment->comment = $req->comment;
-            $comment->name = Auth::user()->name;
-            $comment->post_id = $id;
-            $comment->save();
-            return redirect()->back();
+            if(count($req->comment) > 0 && $req->comment != NULL)
+            {
+              $comment->comment = $req->comment;
+              $comment->name = Auth::user()->name;
+              $comment->post_id = $id;
+              $comment->save();
+              Session::flash("success", "Comment was succesfully created");
+              return redirect()->back();
+            }
           }
           else
           {
