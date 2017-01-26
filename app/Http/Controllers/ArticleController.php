@@ -115,8 +115,12 @@ class ArticleController extends Controller
         } //if no errors occur, the article can update
         $articles->update($req->all());
         Session::flash("success", ($req->title ." was succesfully updated"));
-        return redirect("/")->with(compact('id'));
       }
+      else
+      {
+        Session::flash("error_", ("You can't edit an article that isn't yours!"));
+      }
+      return redirect("/")->with(compact('id'));
     }
     // ELOQUENT DELETE
     public function delete(Request $req, $id)

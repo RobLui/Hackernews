@@ -102,6 +102,10 @@ class CommentsController extends Controller
         $comment->update($req->all());
         Session::flash("success", "Comment was succesfully updated");
       }
+      else
+      {
+        Session::flash("error_", ("You can't edit a comment that isn't yours!"));
+      }
       return redirect("/comments/{$comment->post_id}");
     }
     // ELOQUENT DELETE
