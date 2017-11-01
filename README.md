@@ -1,11 +1,9 @@
-## Hackernews
+# Hackernews
 
-Made with Laravel 
+## Author : Robbert Luit
 
-+ Hackernews: (robbertluit.be)
- + [Hackernews](https://robbertluit.frb.io)
- + /home
- + /edit/
- + /article/edit/
- + /article/add
- + /comments
+## DESCRIPTION
+> This was made for Web Backend during my second year of college 
+
+
+
