@@ -7,10 +7,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Hackernews') }}</title>
-    <link href="/css/app.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('images/apple-touch-icon-57x57.png') }}">
     <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('images/apple-touch-icon-60x60.png') }}">
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('images/apple-touch-icon-72x72.png') }}">
@@ -24,10 +23,10 @@
     <link rel="icon" type="image/png" href="{{ asset('images/favicon-32x32.png') }}" sizes="32x32">
     <link rel="icon" type="image/png" href="{{ asset('images/favicon-96x96.png') }}" sizes="96x96">
     <link rel="icon" type="image/png" href="{{ asset('images/android-chrome-192x192.png') }}" sizes="192x192">
-    <meta name="msapplication-square70x70logo" content="{{ asset('images/smalltile.png') }}" />
-    <meta name="msapplication-square150x150logo" content="{{ asset('images/mediumtile.png') }}" />
-    <meta name="msapplication-wide310x150logo" content="{{ asset('images/widetile.png') }}" />
-    <meta name="msapplication-square310x310logo" content="{{ asset('images/largetile.png') }}" />
+    <meta name="msapplication-square70x70logo" content="{{ asset('images/smalltile.png') }}"/>
+    <meta name="msapplication-square150x150logo" content="{{ asset('images/mediumtile.png') }}"/>
+    <meta name="msapplication-wide310x150logo" content="{{ asset('images/widetile.png') }}"/>
+    <meta name="msapplication-square310x310logo" content="{{ asset('images/largetile.png') }}"/>
 
     <script>
         window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>

@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Votes extends Model
 {
-  use SoftDeletes;
+    use SoftDeletes;
 
-  protected $fillable = [
-       'up_down','voted_by','article_id','value'
-  ];
+    protected $fillable = [
+        'up_down', 'voted_by', 'article_id', 'value'
+    ];
 }

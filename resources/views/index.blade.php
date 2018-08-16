@@ -37,7 +37,7 @@
                                                                                                             @endif
                                                                                                             <button class="up-down" name="up" id="up"
                                                                                                                     value="up">
-                                                                                                                <i class="fa fa-caret-up"></i>
+                                                                                                                &#9650;
                                                                                                             </button>
                                                                                                             {{ csrf_field() }}
                                                                                                         </div>
@@ -55,7 +55,7 @@
                                                                                                                                             name="down"
                                                                                                                                             id="down"
                                                                                                                                             value="down">
-                                                                                                                                        <i class="fa fa-caret-down"></i>
+                                                                                                                                        &#9660;
                                                                                                                                     </button>
                                                                                                                                     {{ csrf_field() }}
                                                                                                                                 </div>

@@ -34,11 +34,13 @@
                                             <div class="vote">
                                                 <div class="form-inline upvote">
                                                     <button class="up-down">
-                                                        <i class="fa fa-caret-up"></i></button>
+                                                        &#9650;
+                                                    </button>
                                                 </div>
                                                 <div class="form-inline downvote">
                                                     <button class="up-down">
-                                                        <i class="fa fa-caret-down"></i></button>
+                                                        &#9660;
+                                                    </button>
                                                 </div>
                                             </div>
                                             <div class="url">&nbsp;
