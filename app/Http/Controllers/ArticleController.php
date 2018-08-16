@@ -22,12 +22,11 @@ class ArticleController extends Controller
         $articles = Article::all();
         $comments = Comment::all();
         $votes = Votes::all();
-//        $articles->votes = 1;
 
         return view('index', compact('articles', 'comments', 'votes'));
     }
 
-    // CREATE
+    //CREATE
     public function create(Request $request)
     {
         // Check if the user is logged in -> only than, an article can be added
@@ -42,9 +41,10 @@ class ArticleController extends Controller
                 return view('/articles/add')
                     ->withErrors($validator);
             }
-            if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $request->url)) {
+            // Preg match url
+            /** @var Request $request */
+            if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $request->url())) {
                 return view('/articles/add')
-                    /** @var Request $request */
                     ->withErrors($request->url() . " is not a valid URL");
             }
             // No validation error, continue..
@@ -72,7 +72,7 @@ class ArticleController extends Controller
         }
     }
 
-    // ELOQUENT EDIT
+    //EDIT
     public function edit($id)
     {
         if (Auth::check()) {
@@ -83,7 +83,7 @@ class ArticleController extends Controller
         }
     }
 
-    // ELOQUENT UPDATE
+    //UPDATE
     public function update(Request $req, $id)
     {
         $articles = Article::findOrFail($id);
@@ -101,11 +101,12 @@ class ArticleController extends Controller
                     ->withErrors($validator);
             }
             // Check for valid email through regEX
-            if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $req->url)) {
+            if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $req->url())) {
                 return view('/articles/edit')
                     ->withArticles($articles)
-                    ->withErrors($req->url . " is not a valid URL");
-            } //if no errors occur, the article can update
+                    ->withErrors($req->url() . " is not a valid URL");
+            }
+            //if no errors occur, the article can update
             $articles->update($req->all());
             Session::flash("success", ($req->title . " was succesfully updated"));
         } else {
@@ -114,11 +115,10 @@ class ArticleController extends Controller
         return redirect("/")->with(compact('id'));
     }
 
-    // ELOQUENT DELETE
+    //DELETE
     public function delete(Request $req, $id)
     {
         $articles = Article::findOrFail($id);
-        //cancel if no delete is wanted
         if (!$req->cancel) {
             if (Auth::user()->name == $articles->posted_by) {
                 $articles->delete($req->all());

@@ -8,16 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class VotesController extends Controller
 {
-
     // If user hasn't voted on article before
     function create(Request $req, $id)
     {
         session_start();
-        //article id in database?
         $user = Auth::user()->name;
         $voted_by = Votes::all()->where('voted_by', $user)->where('article_id', $id);
 
-        $vote = new Votes;
+        $vote = new Votes();
         // if it's not in the database..
         if (count($voted_by) == 0) {
             // Create a new vote
@@ -46,7 +44,6 @@ class VotesController extends Controller
         $user = Auth::user()->name;
         // Check of er al votes bestaan in de database
         $voted_by = Votes::all()->where('voted_by', "default");
-
         // 1. Check what article(s) the user voted on
         $voted_art = Votes::all()->where('voted_by', $user);
 

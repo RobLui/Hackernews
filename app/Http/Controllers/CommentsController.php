@@ -33,7 +33,7 @@ class CommentsController extends Controller
         return view("comments.show", compact('articles', 'comments'));
     }
 
-    // CREAET comment
+    // CREATE
     public function create(Request $req, $id)
     {
         $comment = new Comment;
@@ -69,14 +69,14 @@ class CommentsController extends Controller
         }
     }
 
-    // Show edit comment
+    // SHOW EDIT
     public function edit($id)
     {
         $comment = Comment::findOrFail($id);
         return view("comments.edit", compact("comment"));
     }
 
-    // ELOQUENT UPDATE
+    // UPDATE
     public function update(Request $req, $id)
     {
         $comment = Comment::findOrFail($id);
@@ -97,7 +97,7 @@ class CommentsController extends Controller
         return redirect("/comments/{$comment->post_id}");
     }
 
-    // ELOQUENT DELETE
+    // DELETE
     public function delete(Request $req, $id)
     {
         $comment = Comment::findOrFail($id);
