@@ -43,14 +43,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('index') }}">
                     {{ config('app.name', 'Hackernews') }}
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <ul class="nav navbar-nav">
-                    &nbsp;
                     @if (Auth::user())
                         <li><a href="{{ url('/home') }}">Home</a></li>
                         <li><a href="{{ url('article/add') }}">Add article</a></li>
@@ -62,14 +61,13 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
-
                             <ul class="dropdown-menu" role="menu">
                                 <li>
                                     <a href="{{ url('/logout') }}"
@@ -78,7 +76,7 @@
                                         Logout
                                     </a>
 
-                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
                                 </li>
@@ -91,6 +89,6 @@
     </nav>
     @yield('content')
 </div>
-<script src="/js/app.js"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

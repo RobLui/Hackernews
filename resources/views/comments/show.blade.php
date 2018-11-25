@@ -123,7 +123,6 @@
                                     </div>
                                 @endif
                                 <div class="panel-content">
-
                                     <form action="/comments/add/{{$articles->id}}" method="POST" class="form-horizontal">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}"> <!-- mismatch token error fix -->

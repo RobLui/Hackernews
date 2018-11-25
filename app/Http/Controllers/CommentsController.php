@@ -13,7 +13,7 @@ use function compact;
 
 class CommentsController extends Controller
 {
-    // SHOW comment index
+    //GET
     public function index(Request $req, $id)
     {
         $articles = Article::all();
@@ -33,7 +33,7 @@ class CommentsController extends Controller
         return view("comments.show", compact('articles', 'comments'));
     }
 
-    // CREATE
+    //CREATE
     public function create(Request $req, $id)
     {
         $comment = new Comment;
@@ -69,14 +69,14 @@ class CommentsController extends Controller
         }
     }
 
-    // SHOW EDIT
+    //EDIT
     public function edit($id)
     {
         $comment = Comment::findOrFail($id);
         return view("comments.edit", compact("comment"));
     }
 
-    // UPDATE
+    //UPDATE
     public function update(Request $req, $id)
     {
         $comment = Comment::findOrFail($id);
@@ -97,7 +97,7 @@ class CommentsController extends Controller
         return redirect("/comments/{$comment->post_id}");
     }
 
-    // DELETE
+    //DELETE
     public function delete(Request $req, $id)
     {
         $comment = Comment::findOrFail($id);

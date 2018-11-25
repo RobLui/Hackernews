@@ -14,6 +14,7 @@ use function compact;
 
 class ArticleController extends Controller
 {
+    //GET
     public function index(request $req)
     {
         $user = User::all();

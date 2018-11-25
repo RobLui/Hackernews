@@ -64,6 +64,7 @@ class VotesController extends Controller
                 }
             }
         }
+        
         // 2. Check if the user has already voted on an article (geeft alle artikels terug waar de user op gevote heeft)
         if (count($voted_art) > 0) {
             foreach ($voted_art as $va) {
